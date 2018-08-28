@@ -13,24 +13,26 @@ end
 
 if Code.ensure_loaded?(Dotenv) do
   current_env = "#{Mix.env}" |> String.downcase
-  envs = [
+  files = [
     "#{root_path}/.env",
     "#{root_path}/envs/.env",
     "#{root_path}/envs/#{current_env}.env"
   ]
 
-  envs = (
+  files = (
     current_env == "test"
-      && List.insert_at(envs, -2, "#{root_path}/envs/dev.env")
-      || envs
+      && List.insert_at(files, -2, "#{root_path}/envs/dev.env")
+      || files
   )
 
-  for file <- envs do
+  Enum.reduce(files, %{}, fn file, acc ->
     if File.exists?(file) do
       %{values: values} = Dotenv.load(file)
-      values
-        |> Map.merge(System.get_env())
-        |> System.put_env()
+      Map.merge(acc, values)
+    else
+      acc
     end
-  end
+  end)
+  |> Map.merge(System.get_env())
+  |> System.put_env()
 end

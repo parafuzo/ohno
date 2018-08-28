@@ -1,0 +1,48 @@
+[
+  {
+    "request": {
+      "body": "{\"state\":\"success\",\"description\":\"Test github api client in this project\",\"context\":\"fabion/test\"}",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "***"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "https://api.github.com/repos/nuxlli/fabion/statuses/34c4a004a90f3aa4985c9edf374a98a6fc77c7b2"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"url\":\"https://api.github.com/repos/nuxlli/fabion/statuses/34c4a004a90f3aa4985c9edf374a98a6fc77c7b2\",\"avatar_url\":\"https://avatars1.githubusercontent.com/u/8738?v=4\",\"id\":5418634686,\"node_id\":\"MDEzOlN0YXR1c0NvbnRleHQ1NDE4NjM0Njg2\",\"state\":\"success\",\"description\":\"Test github api client in this project\",\"target_url\":null,\"context\":\"fabion/test\",\"created_at\":\"2018-08-28T19:45:17Z\",\"updated_at\":\"2018-08-28T19:45:17Z\",\"creator\":{\"login\":\"nuxlli\",\"id\":8738,\"node_id\":\"MDQ6VXNlcjg3Mzg=\",\"avatar_url\":\"https://avatars1.githubusercontent.com/u/8738?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/nuxlli\",\"html_url\":\"https://github.com/nuxlli\",\"followers_url\":\"https://api.github.com/users/nuxlli/followers\",\"following_url\":\"https://api.github.com/users/nuxlli/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/nuxlli/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/nuxlli/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/nuxlli/subscriptions\",\"organizations_url\":\"https://api.github.com/users/nuxlli/orgs\",\"repos_url\":\"https://api.github.com/users/nuxlli/repos\",\"events_url\":\"https://api.github.com/users/nuxlli/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/nuxlli/received_events\",\"type\":\"User\",\"site_admin\":false}}",
+      "headers": {
+        "Server": "GitHub.com",
+        "Date": "Tue, 28 Aug 2018 19:45:17 GMT",
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Length": "1302",
+        "Status": "201 Created",
+        "X-RateLimit-Limit": "5000",
+        "X-RateLimit-Remaining": "4997",
+        "X-RateLimit-Reset": "1535488867",
+        "Cache-Control": "private, max-age=60, s-maxage=60",
+        "Vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
+        "ETag": "\"4c809293bf8aef7c3d002a8cfdf9e6b0\"",
+        "X-OAuth-Scopes": "repo:status, repo_deployment",
+        "X-Accepted-OAuth-Scopes": "",
+        "Location": "https://api.github.com/repos/nuxlli/fabion/statuses/34c4a004a90f3aa4985c9edf374a98a6fc77c7b2",
+        "X-GitHub-Media-Type": "github.v3; format=json",
+        "Access-Control-Expose-Headers": "ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+        "Access-Control-Allow-Origin": "*",
+        "Strict-Transport-Security": "max-age=31536000; includeSubdomains; preload",
+        "X-Frame-Options": "deny",
+        "X-Content-Type-Options": "nosniff",
+        "X-XSS-Protection": "1; mode=block",
+        "Referrer-Policy": "origin-when-cross-origin, strict-origin-when-cross-origin",
+        "Content-Security-Policy": "default-src 'none'",
+        "X-Runtime-rack": "0.075547",
+        "X-GitHub-Request-Id": "C397:5537:12DB9AB:2A56904:5B85A64D"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  }
+]

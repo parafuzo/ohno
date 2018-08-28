@@ -18,14 +18,13 @@ defmodule Fabion.Github do
     ]
   end
 
-  # def process_status_code(status) when status >= 200 and status < 300, do: 200
-  # def process_status_code(status) when status == 400, do: 200
-  # def process_status_code(status), do: status
+  def process_status_code(status) when status >= 200 and status < 300, do: 200
+  def process_status_code(status), do: status
 
   # @fields [:api_id, :message, :message_uuid, :invalid_number, :error]
   def process_response_body(body) do
     body
-      |> Poison.decode!(keys: :atoms)
+      |> Poison.decode!()
       # |> Map.take(@fields)
   end
 

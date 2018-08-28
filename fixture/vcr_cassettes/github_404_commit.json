@@ -13,17 +13,17 @@
     },
     "response": {
       "binary": false,
-      "body": "{\"message\":\"Not Found\",\"documentation_url\":\"https://developer.github.com/v3/repos/statuses/#create-a-status\"}",
+      "body": "{\"message\":\"No commit found for SHA: xpto\",\"documentation_url\":\"https://developer.github.com/v3/repos/statuses/#create-a-status\"}",
       "headers": {
         "Server": "GitHub.com",
-        "Date": "Tue, 28 Aug 2018 17:50:52 GMT",
+        "Date": "Tue, 28 Aug 2018 19:45:17 GMT",
         "Content-Type": "application/json; charset=utf-8",
-        "Content-Length": "109",
-        "Status": "404 Not Found",
+        "Content-Length": "129",
+        "Status": "422 Unprocessable Entity",
         "X-RateLimit-Limit": "5000",
-        "X-RateLimit-Remaining": "4996",
-        "X-RateLimit-Reset": "1535481964",
-        "X-OAuth-Scopes": "repo",
+        "X-RateLimit-Remaining": "4998",
+        "X-RateLimit-Reset": "1535488867",
+        "X-OAuth-Scopes": "repo:status, repo_deployment",
         "X-Accepted-OAuth-Scopes": "",
         "X-GitHub-Media-Type": "github.v3; format=json",
         "Access-Control-Expose-Headers": "ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
@@ -34,10 +34,10 @@
         "X-XSS-Protection": "1; mode=block",
         "Referrer-Policy": "origin-when-cross-origin, strict-origin-when-cross-origin",
         "Content-Security-Policy": "default-src 'none'",
-        "X-Runtime-rack": "0.049057",
-        "X-GitHub-Request-Id": "FFF9:5538:18C1A9F:3232162:5B858B7C"
+        "X-Runtime-rack": "0.056987",
+        "X-GitHub-Request-Id": "C397:5537:12DB979:2A568D6:5B85A64D"
       },
-      "status_code": 404,
+      "status_code": 422,
       "type": "ok"
     }
   }

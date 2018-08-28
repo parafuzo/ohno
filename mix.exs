@@ -9,6 +9,9 @@ defmodule Fabion.Mixfile do
       elixirc_paths: elixirc_paths(Mix.env),
       compilers: [:phoenix, :gettext] ++ Mix.compilers,
       start_permanent: Mix.env == :prod,
+      preferred_cli_env: [
+        "test.watch": :test,
+      ],
       deps: deps()
     ]
   end
@@ -49,7 +52,7 @@ defmodule Fabion.Mixfile do
       {:shorter_maps, "~> 2.2"},
 
       # Test and developer
-      {:mix_test_watch, "~> 0.8", only: :dev, runtime: false},
+      {:mix_test_watch, "~> 0.8", only: :test, runtime: false},
       {:exvcr, "~> 0.10", only: :test},
     ]
   end
