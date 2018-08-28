@@ -22,7 +22,7 @@ defmodule Fabion.Mixfile do
   def application do
     [
       mod: {Fabion.Application, []},
-      extra_applications: [:logger, :runtime_tools, :goth]
+      extra_applications: [:logger, :runtime_tools]
     ]
   end
 
@@ -54,6 +54,7 @@ defmodule Fabion.Mixfile do
       # Test and developer
       {:mix_test_watch, "~> 0.8", only: :test, runtime: false},
       {:exvcr, "~> 0.10", only: :test},
+      {:mox, "~> 0.4.0", only: :test},
     ]
   end
 end

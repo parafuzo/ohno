@@ -1,5 +1,5 @@
 defmodule Fabion.Repo do
-  def update_status() do
+  @adapter Keyword.get(Application.get_env(:fabion, __MODULE__), :adapter, Fabion.Repo.GithubAdapter)
 
-  end
+  defdelegate statuses(repo, commit_sha, parameters), to: @adapter
 end

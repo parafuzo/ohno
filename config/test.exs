@@ -8,3 +8,6 @@ config :fabion, FabionWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :fabion, Fabion.Repo,
+  adapter: Fabion.MockRepoAdapter
