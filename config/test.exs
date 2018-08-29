@@ -9,5 +9,5 @@ config :fabion, FabionWeb.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
-config :fabion, Fabion.Repo,
-  adapter: Fabion.MockRepoAdapter
+config :fabion, Fabion.Source,
+  adapter: Fabion.MockSourceAdapter

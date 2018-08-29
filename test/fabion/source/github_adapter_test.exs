@@ -1,8 +1,8 @@
-defmodule Fabion.Repo.GithubAdapterTest do
+defmodule Fabion.Source.GithubAdapterTest do
   use ExUnit.Case, async: true
   use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
-  alias Fabion.Repo.GithubAdapter
+  alias Fabion.Source.GithubAdapter
 
   describe to_string(__MODULE__) do
     setup do

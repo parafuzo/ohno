@@ -1,6 +1,6 @@
-defmodule Fabion.Repo.GithubAdapter do
+defmodule Fabion.Source.GithubAdapter do
   import ShorterMaps
-  @behaviour Fabion.Repo.RepoAdapter
+  @behaviour Fabion.Source.SourceAdapter
 
   def statuses(repo, commit_sha, parameters) do
     post_request("/repos/#{repo}/statuses/#{commit_sha}", parameters)
@@ -34,7 +34,7 @@ defmodule Fabion.Repo.GithubAdapter do
   end
 
   defp configs do
-    Application.get_env(:fabion, Fabion.Repo)
+    Application.get_env(:fabion, Fabion.Source)
   end
 
   defp post_request(path, body, status \\ 200) do

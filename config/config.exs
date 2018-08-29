@@ -5,6 +5,7 @@
 # is restricted to this project.
 use Mix.Config
 
+# Load envs from `./envs/#{Mix.env}.env`
 Code.eval_file("./dotenv.exs", __DIR__)
 
 # Configures the endpoint
@@ -24,8 +25,8 @@ config :goth,
   config_module: Fabion.GothConfig,
   json_env: {:system, {Base, :decode64, []}, "GOTH_JSON_BASE64"}
 
-config :fabion, Fabion.Repo,
-  adapter: Fabion.Repo.GithubAdapter,
+config :fabion, Fabion.Source,
+  adapter: Fabion.Source.GithubAdapter,
   auth_token: {:system, :string, "FABION_GITHUB_TOKE"}
 
 # Import environment specific config. This must remain at the bottom

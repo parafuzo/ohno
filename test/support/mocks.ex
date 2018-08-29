@@ -1,1 +1,1 @@
-Mox.defmock(Fabion.MockRepoAdapter, for: Fabion.Repo.RepoAdapter)
+Mox.defmock(Fabion.MockSourceAdapter, for: Fabion.Source.SourceAdapter)
