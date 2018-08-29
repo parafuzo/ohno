@@ -45,6 +45,14 @@ exports.config = {
   // Configure your plugins
   plugins: {
     babel: {
+      presets: [
+        ['@babel/env', {
+          targets: {
+            browsers: ['last 2 versions', 'safari >= 7']
+          }
+        }],
+        "@babel/preset-react"
+      ],
       // Do not use ES6 compiler in vendor code
       ignore: [/vendor/]
     }
@@ -57,6 +65,7 @@ exports.config = {
   },
 
   npm: {
-    enabled: true
+    enabled: true,
+    whitelist: ["phoenix", "phoenix_html", "react", "react-dom"]
   }
 };
