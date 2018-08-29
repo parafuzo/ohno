@@ -12,6 +12,7 @@ defmodule Fabion.Mixfile do
       preferred_cli_env: [
         "test.watch": :test,
       ],
+      aliases: aliases(),
       deps: deps()
     ]
   end
@@ -38,6 +39,10 @@ defmodule Fabion.Mixfile do
       # Phoenix Framewokr
       {:phoenix, "~> 1.3.3"},
       {:phoenix_pubsub, "~> 1.0"},
+      {:phoenix_ecto, "~> 3.2"},
+      {:postgrex, ">= 0.0.0"},
+      {:phoenix_html, "~> 2.10"},
+      {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
 
@@ -55,6 +60,32 @@ defmodule Fabion.Mixfile do
       {:mix_test_watch, "~> 0.8", only: :test, runtime: false},
       {:exvcr, "~> 0.10", only: :test},
       {:mox, "~> 0.4.0", only: :test},
+    ]
+  end
+
+  # Aliases are shortcuts or tasks specific to the current project.
+  # For example, to create, migrate and run the seeds file at once:
+  #
+  #     $ mix ecto.setup
+  #
+  # See the documentation for `Mix` for more info on aliases.
+  defp aliases do
+    [
+      "ecto.seeds": ["run priv/repo/seeds.exs"],
+      "ecto.redo": ["ecto.rollback -n 1", "ecto.migrate"],
+      "ecto.setup": ["ecto.create", "ecto.migrate", "ecto.seeds"],
+      "ecto.reset": ["ecto.drop", "ecto.setup"],
+
+      # Release
+      "release.prod": ["compile", "phx.digest", "release"],
+
+      # Test options
+      test: ["ecto.create --quiet", "ecto.migrate", "test"],
+      "test.drop": ["ecto.drop"],
+      "test.setup": ["ecto.create --quite", "ecto.migrate"],
+      "test.reset": ["test.drop", "test.setup"],
+      "test.skip": ["test.watch --exclude skip:true"],
+      "test.only": ["test.watch --only runnable:true"],
     ]
   end
 end

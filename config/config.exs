@@ -8,11 +8,17 @@ use Mix.Config
 # Load envs from `./envs/#{Mix.env}.env`
 Code.eval_file("./dotenv.exs", __DIR__)
 
+# General application configuration
+config :fabion,
+  ecto_repos: [Fabion.Repo]
+
 # Configures the endpoint
 config :fabion, FabionWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "Gvh/uXugFAW3EHBzviZTuXF5alfa92hHbyrib5PUEpvgW1Ta92VILdisEw6e9TDl",
-  render_errors: [view: FabionWeb.ErrorView, accepts: ~w(json)],
+  secret_key_base: {
+    :system, "FABION_SECRET_KEY", "g+MkYFB/LY6zQ9Jrs/8AthNjLBv3GPKvjISnssB7UV225i4G3N0c2yvSktzYrVih"
+  },
+  render_errors: [view: FabionWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Fabion.PubSub,
            adapter: Phoenix.PubSub.PG2]
 

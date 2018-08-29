@@ -11,3 +11,12 @@ config :logger, level: :warn
 
 config :fabion, Fabion.Source,
   adapter: Fabion.MockSourceAdapter
+
+# Configure your database
+config :fabion, Fabion.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: "postgres",
+  password: "postgres",
+  database: "fabion_test",
+  hostname: "localhost",
+  pool: Ecto.Adapters.SQL.Sandbox

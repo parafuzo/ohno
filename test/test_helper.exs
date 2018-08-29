@@ -2,3 +2,5 @@
 
 ExUnit.start()
 
+Ecto.Adapters.SQL.Sandbox.mode(Fabion.Repo, :manual)
+
