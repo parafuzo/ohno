@@ -46,7 +46,7 @@ defmodule Fabion.Mixfile do
       {:confex, "~> 3.3", override: true},
 
       # General libs
-      {:google_api_cloud_build, path: "../../github/elixir-google-api/clients/cloud_build"},
+      {:google_api_cloud_build, github: "nuxlli/elixir-google-api", branch: "update_cloud_build", sparse: "clients/cloud_build"},
       {:goth, "~> 0.10.0"},
       {:httpoison, "~> 1.2"},
       {:shorter_maps, "~> 2.2"},
