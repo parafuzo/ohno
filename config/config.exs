@@ -10,7 +10,8 @@ Code.eval_file("./dotenv.exs", __DIR__)
 
 # General application configuration
 config :fabion,
-  ecto_repos: [Fabion.Repo]
+  ecto_repos: [Fabion.Repo],
+  generators: [binary_id: true]
 
 # Configures the endpoint
 config :fabion, FabionWeb.Endpoint,

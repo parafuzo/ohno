@@ -22,6 +22,8 @@ defmodule Fabion.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Fabion.DataCase
+
+      import Fabion.Factories
     end
   end
 
@@ -33,6 +35,12 @@ defmodule Fabion.DataCase do
     end
 
     :ok
+  end
+
+  defmacro assert_validate(:required, field, errors) do
+    quote do
+      assert {unquote(field), {"can't be blank", [validation: :required]}} in unquote(errors)
+    end
   end
 
   @doc """

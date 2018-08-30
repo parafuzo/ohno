@@ -1,6 +1,9 @@
 defmodule FabionWeb.Router do
   use FabionWeb, :router
 
+  pipeline :graphql do
+  end
+
   pipeline :webhook do
     plug :accepts, ["json"]
   end
@@ -11,6 +14,18 @@ defmodule FabionWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+  end
+
+  scope "/graphql" do
+    pipe_through :graphql
+
+    forward "/ui", Absinthe.Plug.GraphiQL,
+      schema: FabionWeb.Graphql.Schema,
+      # socket: BrokerWeb.UserSocket,
+      interface: :playground
+
+    forward "/", Absinthe.Plug,
+      schema: FabionWeb.Graphql.Schema
   end
 
   scope "/webhook", FabionWeb do

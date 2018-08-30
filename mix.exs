@@ -6,11 +6,14 @@ defmodule Fabion.Mixfile do
       app: :fabion,
       version: "0.0.1",
       elixir: "~> 1.4",
-      elixirc_paths: elixirc_paths(Mix.env),
-      compilers: [:phoenix, :gettext] ++ Mix.compilers,
-      start_permanent: Mix.env == :prod,
+      elixirc_paths: elixirc_paths(Mix.env()),
+      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
+      start_permanent: Mix.env() == :prod,
       preferred_cli_env: [
         "test.watch": :test,
+        "test.drop": :test,
+        "test.setup": :test,
+        "test.reset": :test
       ],
       aliases: aliases(),
       deps: deps()
@@ -29,13 +32,18 @@ defmodule Fabion.Mixfile do
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_),     do: ["lib"]
+  defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
   #
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      # sugar
+      {:pipe_to, "~> 0.2.0"},
+      {:shorter_maps, "~> 2.2"},
+      {:jqish, "~> 0.1.2", only: :test},
+
       # Phoenix Framewokr
       {:phoenix, "~> 1.3.3"},
       {:phoenix_pubsub, "~> 1.0"},
@@ -46,20 +54,33 @@ defmodule Fabion.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
 
+      # Graphql
+      {:absinthe, "~> 1.4"},
+      {:absinthe_plug, "~> 1.4"},
+      {:absinthe_relay, "~> 1.4"},
+      {:absinthe_phoenix, "~> 1.4"},
+      {:absinthe_ecto, "~> 0.1.3"},
+
       # Configs and envs controller
       {:dotenv, "~> 3.0"},
       {:confex, "~> 3.3", override: true},
 
       # General libs
-      {:google_api_cloud_build, github: "nuxlli/elixir-google-api", branch: "update_cloud_build", sparse: "clients/cloud_build"},
+      {:google_api_cloud_build,
+       github: "nuxlli/elixir-google-api",
+       branch: "update_cloud_build",
+       sparse: "clients/cloud_build"},
       {:goth, "~> 0.10.0"},
       {:httpoison, "~> 1.2"},
-      {:shorter_maps, "~> 2.2"},
+      {:slugify, "~> 1.1"},
+      {:timex, "~> 3.3"},
 
       # Test and developer
       {:mix_test_watch, "~> 0.8", only: :test, runtime: false},
+      {:faker, "~> 0.10.0", only: [:dev, :test]},
+      {:ex_machina, "~> 2.2", only: [:dev, :test]},
       {:exvcr, "~> 0.10", only: :test},
-      {:mox, "~> 0.4.0", only: :test},
+      {:mox, "~> 0.4.0", only: :test}
     ]
   end
 
@@ -85,7 +106,7 @@ defmodule Fabion.Mixfile do
       "test.setup": ["ecto.create --quite", "ecto.migrate"],
       "test.reset": ["test.drop", "test.setup"],
       "test.skip": ["test.watch --exclude skip:true"],
-      "test.only": ["test.watch --only runnable:true"],
+      "test.only": ["test.watch --only runnable:true"]
     ]
   end
 end
