@@ -19,16 +19,55 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import socket from "./socket"
-import React from "react"
-import ReactDOM from "react-dom"
+import React from "react";
+import ReactDOM from "react-dom";
+// import buildGraphQLProvider from 'ra-data-graphql-simple';
+// import { HttpLink } from 'apollo-link-http';
+// import ApolloClient from "apollo-boost";
+// import { InMemoryCache } from 'apollo-cache-inmemory';
+import { Admin, Resource } from "react-admin";
+// import { ApolloProvider } from "react-apollo";
 
-class HelloWorld extends React.Component {
+import { RepositoryList } from "./repositories";
+
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = { dataProvider: null };
+  }
+
+  componentDidMount() {
+    // const client = new ApolloClient({
+    //   uri: "/graphql",
+    // });
+
+    this.setState({
+      dataProvider(...args) {
+        console.log({ args });
+        return {
+          data: [{id: 1, github: "nuxlli/fabion"}],
+          total: 1
+        }
+      }
+    })
+  }
+
   render() {
-    return (<h1>Hello World!</h1>)
+    const { dataProvider } = this.state;
+
+    if (!dataProvider) {
+      return <div>Loading</div>;
+    }
+
+    return (
+      <Admin dataProvider={dataProvider}>
+        <Resource name="Repository" list={RepositoryList} />
+      </Admin>
+    );
   }
 }
 
 ReactDOM.render(
-  <HelloWorld />,
+  <App />,
   document.getElementById("root")
-)
+);
