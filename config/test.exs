@@ -12,6 +12,10 @@ config :logger, level: :warn
 config :fabion, Fabion.Source,
   adapter: Fabion.MockSourceAdapter
 
+config :mix_test_watch,
+  clear: true,
+  extra_extensions: ["graphql"]
+
 # Configure your database
 config :fabion, Fabion.Repo,
   adapter: Ecto.Adapters.Postgres,

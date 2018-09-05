@@ -42,18 +42,27 @@ defmodule FabionWeb.GraphqlCase do
     Absinthe.run(query, schema, options)
   end
 
-  def run_graphql!(query, options \\ [], schema \\ Schema) do
+  def run_graphql!(query, options \\ [], schema \\ Schema)
+
+  def run_graphql!(query, options, schema) when is_atom(query) do
+    query = get_query!(to_string(query))
+    run_graphql!(query, options, schema)
+  end
+
+  def run_graphql!(query, options, schema) do
     case run_graphql(query, options, schema) do
       {:ok, result} -> result
       {:error, error} -> throw error
     end
   end
 
-  defmacro get_query(file) do
-    quote do
-      file = unquote(file)
-      File.read!(Path.join(__DIR__, "#{file}.graphql"))
-    end
+  def get_query!(file) do
+    dir = [__DIR__, "..", "..", "priv", "queries"]
+      |> Path.join()
+      |> Path.expand()
+
+    File.read!(Path.join(dir, "#{file}.graphql"))
+    <> File.read!(Path.join(dir, "fragments.graphql"))
   end
 
   def jq(target, query) do
