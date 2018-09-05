@@ -12,22 +12,14 @@
 // If you no longer want to use a dependency, remember
 // to also remove its path from "config.paths.watched".
 import "phoenix_html"
-
-// Import local files
-//
-// Local files can be imported directly using relative
-// paths "./socket" or full ones "web/static/js/socket".
+import "@babel/polyfill";
 
 // import socket from "./socket"
 import React from "react";
 import ReactDOM from "react-dom";
-// import buildGraphQLProvider from 'ra-data-graphql-simple';
-// import { HttpLink } from 'apollo-link-http';
-// import ApolloClient from "apollo-boost";
-// import { InMemoryCache } from 'apollo-cache-inmemory';
 import { Admin, Resource } from "react-admin";
-// import { ApolloProvider } from "react-apollo";
 
+import makeProvider from './data_provider';
 import { RepositoryList } from "./repositories";
 
 class App extends React.Component {
@@ -37,19 +29,9 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // const client = new ApolloClient({
-    //   uri: "/graphql",
-    // });
-
-    this.setState({
-      dataProvider(...args) {
-        console.log({ args });
-        return {
-          data: [{id: 1, github: "nuxlli/fabion"}],
-          total: 1
-        }
-      }
-    })
+    return makeProvider().then((dataProvider) => {
+      this.setState({ dataProvider });
+    });
   }
 
   render() {

@@ -1,0 +1,5 @@
+query Repository($id:ID!) {
+  repository(id: $id) {
+    ...repository
+  }
+}

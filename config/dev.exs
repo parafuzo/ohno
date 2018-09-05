@@ -11,7 +11,7 @@ config :fabion, FabionWeb.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
-  watchers: [node: ["node_modules/parcel-bundler/bin/cli.js", "watch", "js/app.js", "--out-dir", "../priv/static/js", cd: Path.expand("../assets", __DIR__)]]
+  watchers: [yarn: ["run", "watch", cd: Path.expand("../assets", __DIR__)]]
   # watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
                     # cd: Path.expand("../assets", __DIR__)]]
 

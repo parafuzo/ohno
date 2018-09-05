@@ -2,26 +2,37 @@
   "repository": {},
   "license": "MIT",
   "scripts": {
-    "deploy": "parcel build js/app.js --out-dir ../priv/static/js",
-    "watch": "parcel watch js/app.js --out-dir ../priv/static/js"
+    "build": "webpack --mode production --progress",
+    "watch": "webpack --mode development --progress --color --watch"
   },
   "dependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/register": "^7.0.0",
     "apollo-boost": "^0.1.15",
+    "babel-loader": "^8.0.2",
     "graphql-tag": "^2.9.2",
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html",
+    "ramda": "^0.25.0",
     "react": "0.14.x || 15.* || ^15.0.0 || ^16.0.0",
     "react-dom": "^16.4.2"
   },
   "devDependencies": {
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-plugin-ramda": "^1.6.3",
+    "copy-webpack-plugin": "^4.5.2",
+    "dynamic-cdn-webpack-plugin": "^4.0.0",
+    "file-loader": "^2.0.0",
     "graphql": "^0.13.2",
-    "parcel-bundler": "^1.9.7",
-    "parcel-plugin-copy": "^1.0.2",
+    "module-to-cdn": "^3.1.2",
+    "rambda": "^1.2.2",
     "react-admin": "^2.2.2",
-    "redux-saga": "^0.16.0"
+    "redux-saga": "^0.16.0",
+    "webpack": "^4.17.2",
+    "webpack-cli": "^3.1.0",
+    "webpack-manifest-plugin": "^2.0.3"
   }
 }

@@ -8,11 +8,17 @@
     <meta name="author" content="">
 
     <title>Hello Fabion!</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+
+    <link rel="stylesheet" href="<%#= static_path(@conn, "/css/app.css") %>">
+    <link rel="icon" href="/images/favicon-16.png" sizes="16x16">
+    <link rel="icon" href="/images/favicon-32.png" sizes="32x32">
+
   </head>
 
   <body>
     <div id="root"></div>
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
+    <%= {:safe, js_from_manifest(@conn)} %>
   </body>
 </html>
