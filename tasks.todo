@@ -1,0 +1,29 @@
+
+Webhook:
+   ☐ Criar um pipeline a partir de um evento de commit
+   ☐ Com base no branch
+   ☐ Criar um job para Submeter um build para rodar o stage
+   ☐ Pinga o github com status de execução do stage
+
+  -
+- Trigger de branch ou PR
+  - Monitora o resultado
+
+Melhorias:
+  ☐ Verificar e aguardar pelo código no "repositório espelho"
+
+
+  Stages
+  - test
+  - release
+
+  - feature deploy
+  - qa, stage, prod deploys
+
+Repositorie
+
+Pipelines
+  Stages
+    - steps
+    - images
+    - artefatos
