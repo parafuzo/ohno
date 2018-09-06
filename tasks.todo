@@ -12,18 +12,21 @@ Webhook:
 Melhorias:
   ☐ Verificar e aguardar pelo código no "repositório espelho"
 
+Estruturas:
 
-  Stages
-  - test
-  - release
-
-  - feature deploy
-  - qa, stage, prod deploys
-
-Repositorie
+Repositories
+  - github
 
 Pipelines
-  Stages
+  - repository_id
+  Stages (ex: test, release)
     - steps
     - images
     - artefatos
+
+Stages:
+- test
+- release
+
+- feature deploy
+- qa, stage, prod deploys
