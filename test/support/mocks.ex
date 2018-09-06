@@ -1,1 +1,1 @@
-Mox.defmock(Fabion.MockSourceAdapter, for: Fabion.Source.SourceAdapter)
+Mox.defmock(Fabion.MockSourcesAdapter, for: Fabion.Sources.SourcesAdapter)

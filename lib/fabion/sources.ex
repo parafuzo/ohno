@@ -1,6 +1,10 @@
 defmodule Fabion.Sources do
+  @adapter Keyword.get(Application.get_env(:fabion, __MODULE__), :adapter, Fabion.Sources.GithubAdapter)
+
   alias Fabion.Repo
   alias Fabion.Sources.Repository
+
+  defdelegate statuses(repo, commit_sha, parameters), to: @adapter
 
   def add_repository(attrs) do
     attrs

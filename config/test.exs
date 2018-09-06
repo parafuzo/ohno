@@ -9,8 +9,8 @@ config :fabion, FabionWeb.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
-config :fabion, Fabion.Source,
-  adapter: Fabion.MockSourceAdapter
+config :fabion, Fabion.Sources,
+  adapter: Fabion.MockSourcesAdapter
 
 config :mix_test_watch,
   clear: true,
