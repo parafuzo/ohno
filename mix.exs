@@ -48,11 +48,16 @@ defmodule Fabion.Mixfile do
       {:phoenix, "~> 1.3.3"},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.2"},
-      {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
+      {:kronky, "~> 0.5.0"},
+
+      # Ecto
+      {:postgrex, ">= 0.0.0"},
+      {:ecto_enum, "~> 1.1"},
+      {:ex_json_schema, "~> 0.5.4"},
 
       # Graphql
       {:absinthe, "~> 1.4"},
@@ -74,6 +79,12 @@ defmodule Fabion.Mixfile do
       {:httpoison, "~> 1.2"},
       {:slugify, "~> 1.1"},
       {:timex, "~> 3.3"},
+      {:tesla, "~> 1.1"},
+      {:yaml_elixir, "~> 2.1"},
+
+      # Background jobs
+      {:gen_queue, "~> 0.1.8"},
+      {:gen_queue_opq, "~> 0.1.1"},
 
       # Test and developer
       {:mix_test_watch, "~> 0.8", only: :test, runtime: false},

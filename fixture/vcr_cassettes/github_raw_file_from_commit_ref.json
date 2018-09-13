@@ -1,0 +1,57 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "User-Agent": "Fabion",
+        "Content-Type": "application/json",
+        "Authorization": "***"
+      },
+      "method": "get",
+      "options": {
+        "httpc_options": [],
+        "http_options": {
+          "autoredirect": "false"
+        }
+      },
+      "request_body": "",
+      "url": "https://raw.githubusercontent.com/nuxlli/fabion/34c4a004a90f3aa4985c9edf374a98a6fc77c7b2/./README.md"
+    },
+    "response": {
+      "binary": false,
+      "body": "# Fabion\n\nTo start your Phoenix server:\n\n  * Install dependencies with `mix deps.get`\n  * Start Phoenix endpoint with `mix phx.server`\n\nNow you can visit [`localhost:4000`](http://localhost:4000) from your browser.\n\nReady to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).\n\n## Learn more\n\n  * Official website: http://www.phoenixframework.org/\n  * Guides: http://phoenixframework.org/docs/overview\n  * Docs: https://hexdocs.pm/phoenix\n  * Mailing list: http://groups.google.com/group/phoenix-talk\n  * Source: https://github.com/phoenixframework/phoenix\n",
+      "headers": {
+        "cache-control": "max-age=300",
+        "connection": "keep-alive",
+        "date": "Thu, 06 Sep 2018 17:59:55 GMT",
+        "via": "1.1 varnish",
+        "accept-ranges": "bytes",
+        "etag": "\"bdda4417006c89ddb7f7fd7da417a2e323edc637\"",
+        "vary": "Authorization,Accept-Encoding",
+        "content-length": "611",
+        "content-type": "text/plain; charset=utf-8",
+        "expires": "Thu, 06 Sep 2018 18:04:55 GMT",
+        "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
+        "strict-transport-security": "max-age=31536000",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "deny",
+        "x-xss-protection": "1; mode=block",
+        "x-geo-block-list": "",
+        "x-github-request-id": "9D50:5BFB:610A1:65E18:5B916A97",
+        "x-served-by": "cache-gru17121-GRU",
+        "x-cache": "HIT",
+        "x-cache-hits": "1",
+        "x-timer": "S1536256795.238343,VS0,VE0",
+        "access-control-allow-origin": "*",
+        "x-fastly-request-id": "f8e46c2c8d2e971b9ad030b80e6abe89186c54d0",
+        "source-age": "131"
+      },
+      "status_code": [
+        "HTTP/1.1",
+        200,
+        "OK"
+      ],
+      "type": "ok"
+    }
+  }
+]
