@@ -1,32 +1,22 @@
+Docs:
+  ✔ Estruturar as tarefas nesse tasks.todo @done (9/11/2018, 2:40:57 PM)
+  ✔ Documentar os schemas básicos no `docs/schemas.wsd` @done (9/11/2018, 2:41:21 PM)
+  ☐ Escrever um README com informação sobre o projeto e como utiliza-lo
+  ☐ Traduzir essa lista de tarefas e o README para inglês
 
 Webhook:
-   ☐ Criar um pipeline a partir de um evento de commit
-   ☐ Com base no branch
-   ☐ Criar um job para Submeter um build para rodar o stage
-   ☐ Pinga o github com status de execução do stage
-
-  -
-- Trigger de branch ou PR
-  - Monitora o resultado
+  ☐ Registrar um evento na base a partir do webhook
+    ☐ Criar ou atualizar o usuário com base no evento
+  ☐ Criar um pipeline a partir de um evento de push
+  ☐ Criar os stages com base no `fabio.yaml`
+    ☐ Montar o stage com as informações do `yaml` de configuração
+    ☐ Opção de criar o novo job para o stage
+  ☐ Criar o job com base no stage
+    ☐ Rodar o job automaticamente no CloudBuild
+    ☐ Linkar cada job ao ao build do CloudBuild
+    ☐ Notificar cada mudança de estado do job para o github
+    ☐ Opção de rodar o job manualmente
 
 Melhorias:
   ☐ Verificar e aguardar pelo código no "repositório espelho"
-
-Estruturas:
-
-Repositories
-  - github
-
-Pipelines
-  - repository_id
-  Stages (ex: test, release)
-    - steps
-    - images
-    - artefatos
-
-Stages:
-- test
-- release
-
-- feature deploy
-- qa, stage, prod deploys
+  ☐ Suportar a criação de pipeline a partir
