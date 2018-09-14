@@ -18,12 +18,16 @@ defmodule Fabion.DataCase do
     quote do
       alias Fabion.Repo
 
+      import ShorterMaps
+      import PipeTo
+
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
       import Fabion.DataCase
 
       import Fabion.Factories
+      import Fabion.Support.Helpers
     end
   end
 

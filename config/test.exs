@@ -12,6 +12,10 @@ config :logger, level: :warn
 config :fabion, Fabion.Sources,
   adapter: Fabion.MockSourcesAdapter
 
+config :fabion, Fabion.Enqueuer, [
+  adapter: GenQueue.Adapters.MockJob
+]
+
 config :mix_test_watch,
   clear: true,
   extra_extensions: ["graphql"]

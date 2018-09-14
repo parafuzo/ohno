@@ -13,6 +13,10 @@ config :fabion,
   ecto_repos: [Fabion.Repo],
   generators: [binary_id: true]
 
+config :fabion, Fabion.Enqueuer, [
+  adapter: GenQueue.Adapters.OPQ
+]
+
 # Configures the endpoint
 config :fabion, FabionWeb.Endpoint,
   url: [host: "localhost"],

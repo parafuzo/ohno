@@ -1,42 +1,34 @@
 defmodule Fabion.Sources.Repository do
-  use Ecto.Schema
-  import Ecto.Changeset
+  use Fabion, :schema
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "sources_repositories" do
-    field :github, :string
     field :gcloud_repo, :string
-    field :secret, :string
-    field :token, :string
+    field :github_repo, :string
+    field :github_secret, :string
+    field :github_token, :string
+
+    has_many(:events, Fabion.Sources.RepositoryEvent)
 
     timestamps()
   end
 
   @doc false
-  def changeset(attrs = %{}) do
-    changeset(%__MODULE__{}, attrs)
-  end
-
-  @doc false
   def changeset(repository, attrs) do
     repository
-    |> cast(attrs, [:github, :gcloud_repo, :secret, :token])
+    |> cast(attrs, [:github_repo, :gcloud_repo, :github_secret, :github_token])
     |> maybe_generate_secret()
-    |> validate_required([:github, :gcloud_repo, :secret, :token])
+    |> validate_required([:github_repo, :gcloud_repo, :github_secret, :github_token])
   end
 
   def maybe_generate_secret(changeset) do
-    case get_field(changeset, :secret) do
+    case get_field(changeset, :github_secret) do
       nil ->
-        secret = random_string()
-        put_change(changeset, :secret, secret)
+        github_secret = random_string()
+        put_change(changeset, :github_secret, github_secret)
       _ ->
         changeset
     end
-  end
-
-  defp random_string(length \\ 32) when length > 31 do
-    length |> :crypto.strong_rand_bytes() |> Base.encode64() |> binary_part(0, length)
   end
 end

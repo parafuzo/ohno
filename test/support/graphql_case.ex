@@ -14,6 +14,7 @@ defmodule FabionWeb.GraphqlCase do
 
       import unquote(__MODULE__)
       import Fabion.Factories
+      import Fabion.Support.Helpers
 
       alias Fabion.Repo
     end
@@ -63,17 +64,5 @@ defmodule FabionWeb.GraphqlCase do
 
     File.read!(Path.join(dir, "#{file}.graphql"))
     <> File.read!(Path.join(dir, "fragments.graphql"))
-  end
-
-  def jq(target, query) do
-    Jqish.run(target, query)
-  end
-
-  def jq!(target, query) do
-    case jq(target, query) do
-      {:ok, result} -> result
-      {:error, error} ->
-        throw error
-    end
   end
 end

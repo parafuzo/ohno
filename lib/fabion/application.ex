@@ -12,6 +12,8 @@ defmodule Fabion.Application do
     children = [
       # Start the Ecto repository
       supervisor(Fabion.Repo, []),
+      # Start queue
+      supervisor(Fabion.Enqueuer, []),
       # Start the endpoint when the application starts
       supervisor(FabionWeb.Endpoint, []),
       # Start your own worker by calling: Fabion.Worker.start_link(arg1, arg2, arg3)

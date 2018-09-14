@@ -11,28 +11,28 @@ defmodule Fabion.Sources.RepositoryTest do
       {:error, %{errors: errors}} =
         Schema.changeset(%{}) |> Repo.insert
 
-      requireds = [:github, :gcloud_repo, :token]
+      requireds = [:github_repo, :gcloud_repo, :github_token]
       for field <- requireds do
         assert_validate(:required, field, errors)
       end
     end
 
     test "make a valid data with factory" do
-      resource = params_with_assocs(:repository, %{secret: nil})
+      resource = params_with_assocs(:repository, %{github_secret: nil})
         |> Schema.changeset()
         |> Repo.insert!
 
-      assert resource.secret != nil
+      assert resource.github_secret != nil
       assert Repo.get!(Schema, resource.id) == resource
     end
 
-    test "don't auto upgrade secret" do
+    test "don't auto upgrade github_secret" do
       resource = params_with_assocs(:repository)
         |> Schema.changeset()
         |> Repo.insert!
 
       changeset = Schema.changeset(resource, %{})
-      assert get_change(changeset, :secret) == nil
+      assert get_change(changeset, :github_secret) == nil
     end
   end
 end
