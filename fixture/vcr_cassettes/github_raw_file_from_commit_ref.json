@@ -15,36 +15,36 @@
         }
       },
       "request_body": "",
-      "url": "https://raw.githubusercontent.com/nuxlli/fabion/34c4a004a90f3aa4985c9edf374a98a6fc77c7b2/./README.md"
+      "url": "https://raw.githubusercontent.com/nuxlli/fabion/330868a5295943b45b6abfba8d6d59aaad4f4f0f/./README.md"
     },
     "response": {
       "binary": false,
-      "body": "# Fabion\n\nTo start your Phoenix server:\n\n  * Install dependencies with `mix deps.get`\n  * Start Phoenix endpoint with `mix phx.server`\n\nNow you can visit [`localhost:4000`](http://localhost:4000) from your browser.\n\nReady to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).\n\n## Learn more\n\n  * Official website: http://www.phoenixframework.org/\n  * Guides: http://phoenixframework.org/docs/overview\n  * Docs: https://hexdocs.pm/phoenix\n  * Mailing list: http://groups.google.com/group/phoenix-talk\n  * Source: https://github.com/phoenixframework/phoenix\n",
+      "body": "# Fabion\n\nTo start your Phoenix server:\n\n  * Install dependencies with `mix deps.get`\n  * Create and migrate your database with `mix ecto.create && mix ecto.migrate`\n  * Install Node.js dependencies with `cd assets && npm install`\n  * Start Phoenix endpoint with `mix phx.server`\n\nNow you can visit [`localhost:4000`](http://localhost:4000) from your browser.\n\nReady to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).\n\n## Learn more\n\n  * Official website: http://www.phoenixframework.org/\n  * Guides: http://phoenixframework.org/docs/overview\n  * Docs: https://hexdocs.pm/phoenix\n  * Mailing list: http://groups.google.com/group/phoenix-talk\n  * Source: https://github.com/phoenixframework/phoenix\n",
       "headers": {
         "cache-control": "max-age=300",
         "connection": "keep-alive",
-        "date": "Thu, 06 Sep 2018 17:59:55 GMT",
+        "date": "Fri, 14 Sep 2018 22:21:28 GMT",
         "via": "1.1 varnish",
         "accept-ranges": "bytes",
-        "etag": "\"bdda4417006c89ddb7f7fd7da417a2e323edc637\"",
+        "etag": "\"d8263f443a7a402d321edbf54cd2204a244c11b7\"",
         "vary": "Authorization,Accept-Encoding",
-        "content-length": "611",
+        "content-length": "756",
         "content-type": "text/plain; charset=utf-8",
-        "expires": "Thu, 06 Sep 2018 18:04:55 GMT",
+        "expires": "Fri, 14 Sep 2018 22:26:28 GMT",
         "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
         "strict-transport-security": "max-age=31536000",
         "x-content-type-options": "nosniff",
         "x-frame-options": "deny",
         "x-xss-protection": "1; mode=block",
         "x-geo-block-list": "",
-        "x-github-request-id": "9D50:5BFB:610A1:65E18:5B916A97",
-        "x-served-by": "cache-gru17121-GRU",
+        "x-github-request-id": "D4D6:141A:6F7FC:79028:5B9C345B",
+        "x-served-by": "cache-gru17134-GRU",
         "x-cache": "HIT",
         "x-cache-hits": "1",
-        "x-timer": "S1536256795.238343,VS0,VE0",
+        "x-timer": "S1536963688.125533,VS0,VE9",
         "access-control-allow-origin": "*",
-        "x-fastly-request-id": "f8e46c2c8d2e971b9ad030b80e6abe89186c54d0",
-        "source-age": "131"
+        "x-fastly-request-id": "371500ae57685653e2803bf3984734def3d33e00",
+        "source-age": "12"
       },
       "status_code": [
         "HTTP/1.1",

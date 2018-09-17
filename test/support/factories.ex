@@ -1,6 +1,9 @@
 defmodule Fabion.Factories do
   use ExMachina.Ecto, repo: Fabion.Repo
 
+  import Fabion.Support.Helpers
+  import ShorterMaps
+
   alias Fabion.Sources
   alias Fabion.Accounts
 
@@ -37,5 +40,15 @@ defmodule Fabion.Factories do
       repository: repository,
       sender: sender,
     }
+  end
+
+  def repository_event_with_params(type, params) do
+    params = read_file_event!("push_commit")
+    {:ok, github_repo} =
+      jq!(params, ".repository.url")
+      |> Sources.parse_repo()
+
+    repository = build(:repository, ~M{github_repo})
+    insert(:repository_event, ~M{type, params, repository})
   end
 end

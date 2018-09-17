@@ -19,6 +19,11 @@ defmodule Fabion.Sources do
     |> @adapter.statuses(repo, commit_sha, parameters)
   end
 
+  def get_file(repo, commit_sha, path) do
+    @adapter.client()
+    |> @adapter.get_file(repo, commit_sha, path)
+  end
+
   def add_event("push", %{"repository" => ~m{url}, "sender" => sender} = params) do
     with {:ok, %{id: repository_id}} <- repo_by_url(url),
          {:ok, %{id: sender_id}} <- Accounts.user_from_sender(sender),
@@ -58,9 +63,9 @@ defmodule Fabion.Sources do
     end
   end
 
-  defp parse_repo(<<"https://github.com/", repo::binary>>) do
+  def parse_repo(<<"https://github.com/", repo::binary>>) do
     {:ok, repo}
   end
 
-  defp parse_repo(_), do: {:error, :invalid_repo}
+  def parse_repo(_), do: {:error, :invalid_repo}
 end

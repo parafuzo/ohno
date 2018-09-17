@@ -22,14 +22,14 @@
       "binary": false,
       "body": "{\"message\":\"No commit found for SHA: xpto\",\"documentation_url\":\"https://developer.github.com/v3/repos/statuses/#create-a-status\"}",
       "headers": {
-        "date": "Thu, 06 Sep 2018 17:59:53 GMT",
+        "date": "Fri, 14 Sep 2018 22:21:29 GMT",
         "server": "GitHub.com",
         "content-length": "129",
         "content-type": "application/json; charset=utf-8",
         "status": "422 Unprocessable Entity",
         "x-ratelimit-limit": "5000",
-        "x-ratelimit-remaining": "4988",
-        "x-ratelimit-reset": "1536258837",
+        "x-ratelimit-remaining": "4996",
+        "x-ratelimit-reset": "1536965841",
         "x-oauth-scopes": "repo:status, repo_deployment",
         "x-accepted-oauth-scopes": "",
         "x-github-media-type": "github.v3; format=json",
@@ -41,8 +41,8 @@
         "x-xss-protection": "1; mode=block",
         "referrer-policy": "origin-when-cross-origin, strict-origin-when-cross-origin",
         "content-security-policy": "default-src 'none'",
-        "x-runtime-rack": "0.047700",
-        "x-github-request-id": "EDC9:0889:306636E:61CED74:5B916B19"
+        "x-runtime-rack": "0.044295",
+        "x-github-request-id": "4936:2E1C:157A1C2:2B6D2CF:5B9C3468"
       },
       "status_code": [
         "HTTP/1.1",

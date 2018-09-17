@@ -21,7 +21,7 @@ defmodule Fabion.Sources.GithubAdapterTest do
       end
     end
 
-    @commit_sha "34c4a004a90f3aa4985c9edf374a98a6fc77c7b2"
+    @commit_sha "330868a5295943b45b6abfba8d6d59aaad4f4f0f"
     test "update a state for valid commit sha", ~M{client} do
       use_cassette "github_statuses_commit" do
         {:ok, %{"state" => "success"}} =
