@@ -1,21 +1,21 @@
 defmodule FabionWeb.WebhookController do
   use FabionWeb, :controller
 
-  alias Fabion.Sources
-  alias Fabion.Sources.RepositoryEvent
+  alias Fabion.Builder
+  alias Fabion.Builder.Pipeline
 
   alias Ecto.Changeset
   import Kronky.Payload
 
   def index(conn, params) do
-    params |> Poison.encode!() |> IO.puts()
+    # params |> Poison.encode!() |> IO.puts()
     # |> IO.inspect()
     [event] = get_req_header(conn, "x-github-event")
     handle_event(event, params) |> response(conn)
   end
 
   defp handle_event(event = "push", params) do
-    Sources.add_event(event, params)
+    Builder.add_pipeline(event, params)
   end
 
   defp handle_event("ping", _params) do
@@ -33,7 +33,7 @@ defmodule FabionWeb.WebhookController do
     |> halt()
   end
 
-  defp response({:ok, %RepositoryEvent{id: id}}, conn) do
+  defp response({:ok, %Pipeline{id: id}}, conn) do
     response({:ok, %{id: id}}, conn)
   end
 

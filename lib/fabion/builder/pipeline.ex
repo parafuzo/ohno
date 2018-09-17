@@ -1,13 +1,13 @@
-defmodule Fabion.Sources.RepositoryEvent do
+defmodule Fabion.Builder.Pipeline do
   use Fabion, :schema
 
-  alias Fabion.Sources.RepositoryEventType
+  alias Fabion.Builder.PipelineFromType
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
-  schema "sources_repository_events" do
+  schema "builder_pipeline" do
     field :params, :map
-    field :type, RepositoryEventType
+    field :from_type, PipelineFromType
 
     belongs_to(:repository, Fabion.Sources.Repository)
     belongs_to(:sender, Fabion.Accounts.GithubUser)
@@ -15,32 +15,33 @@ defmodule Fabion.Sources.RepositoryEvent do
     timestamps()
   end
 
-  @required_fields [:params, :type, :repository_id, :sender_id]
+  @required_fields [:params, :from_type, :repository_id, :sender_id]
   @optional_fields []
 
   @doc false
-  def changeset(repository_event, attrs) do
-    repository_event
+  def changeset(pipeline, attrs) do
+    pipeline
     |> cast(attrs, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
-    |> validate_inclusion(:type, RepositoryEventType.__enum_map__)
+    |> validate_inclusion(:from_type, PipelineFromType.__enum_map__)
     |> validate_params()
   end
 
   defp validate_params(changeset) do
-    case get_field(changeset, :type) do
-      :PUSH -> validate_push(changeset)
-      _ -> changeset
-    end
+    validate_params(changeset, get_field(changeset, :from_type))
   end
 
   @push_schema load_schema(:push)
-  defp validate_push(changeset) do
+  defp validate_params(changeset, :PUSH_EVENT) do
     params = get_field(changeset, :params)
     case ExJsonSchema.Validator.validate(@push_schema, params) do
       :ok -> changeset
       {:error, errors} ->
         add_json_errors(changeset, :params, errors)
     end
+  end
+
+  defp validate_params(changeset, _) do
+    changeset
   end
 end

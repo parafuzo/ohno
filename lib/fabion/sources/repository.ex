@@ -9,7 +9,7 @@ defmodule Fabion.Sources.Repository do
     field :github_secret, :string
     field :github_token, :string
 
-    has_many(:events, Fabion.Sources.RepositoryEvent)
+    has_many(:pipelines, Fabion.Builder.Pipeline)
 
     timestamps()
   end

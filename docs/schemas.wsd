@@ -20,15 +20,10 @@ namespace Accounts #FCF6BD {
     +avatar_url: string
   }
 
-  User "1..*" -- "0..*" Sources.RepositoryEvent
+  User "1..*" -- "0..*" Builder.Pipeline
 }
 
 namespace Sources #FCF6BD {
-  enum RepositoryEventType {
-    <b>PUSH</b>
-    <b>PULL_REQUEST</b>
-  }
-
   class Repository << (S,#FF7700) >> {
     #id: <b>uuid</b>
     +inserted_at: <b>timestamp</b>
@@ -36,26 +31,11 @@ namespace Sources #FCF6BD {
     ..
     *pipelines: <i>Build.Pipeline</i>
     ..
+    +gcloud_repo: string
     +github_repo: string
     +github_secret: string
-    +gcloud_repo: string
     +github_token: string
   }
-
-  class RepositoryEvent << (S,#FF7700) >> {
-    #id: <b>uuid</b>
-    +inserted_at: <b>timestamp</b>
-    +updated_at: <b>timestamp</b>
-    ..
-    *repository: <i>Sources.Repository</i>
-    *sender: <i>Accounts.User</i>
-    ..
-    +type: RepositoryEventType
-    +params: map
-  }
-
-  RepositoryEvent "1..*" -- "0..*" Repository
-  RepositoryEvent --# RepositoryEventType
 }
 
 
@@ -75,21 +55,24 @@ namespace Builder #D0F4DE {
     <b>AUTO</b>
   }
 
+  enum PipelineFromType {
+    <b>PUSH_EVENT</b>
+  }
+
   class Pipeline << (S,#FF7700) >> {
     #id: <b>uuid</b>
     +inserted_at: <b>timestamp</b>
     +updated_at: <b>timestamp</b>
     ..
     *repository: <i>Sources.Repository</i>
-    *Repositoryevent: <i>Sources.RepositoryEvent</i>
+    *sender: <i>Accounts.User</i>
+    *from_type: <i>PipelineFromType</i>
     ..
-    +commit_sha: string
-    +commit_message: string
-    +refs: string
+    +params: map
   }
 
   Pipeline "1..*" -- "0..*" Sources.Repository
-  Pipeline "1..*" -- "0..*" Sources.RepositoryEvent
+  Pipeline --# PipelineFromType
 
   class Stage << (S,#FF7700) >> {
     #id: <b>uuid</b>
@@ -146,12 +129,8 @@ namespace GithubService #99DBF3 {
     +url: string
   }
 
-  enum RepositoryEventType {
-  }
-
   User <-- Accounts.User
   Repository <-- Sources.Repository : "field: github_repo"
-  RepositoryEventType #-- Sources.RepositoryEventType
 }
 
 @enduml

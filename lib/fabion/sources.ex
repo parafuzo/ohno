@@ -1,5 +1,4 @@
 defmodule Fabion.Sources do
-  import ShorterMaps
 
   @adapter Keyword.get(
              Application.get_env(:fabion, __MODULE__),
@@ -8,11 +7,7 @@ defmodule Fabion.Sources do
            )
 
   alias Fabion.Repo
-  alias Fabion.Accounts
   alias Fabion.Sources.Repository
-  alias Fabion.Sources.RepositoryEvent
-  alias Fabion.Enqueuer
-  alias Fabion.Sources.ProcessEventJob
 
   def statuses(repo, commit_sha, parameters) do
     @adapter.client()
@@ -22,18 +17,6 @@ defmodule Fabion.Sources do
   def get_file(repo, commit_sha, path) do
     @adapter.client()
     |> @adapter.get_file(repo, commit_sha, path)
-  end
-
-  def add_event("push", %{"repository" => ~m{url}, "sender" => sender} = params) do
-    with {:ok, %{id: repository_id}} <- repo_by_url(url),
-         {:ok, %{id: sender_id}} <- Accounts.user_from_sender(sender),
-         {:ok, ~M{id} = event} <-
-           ~M{type: :PUSH, repository_id, sender_id, params}
-           |> RepositoryEvent.changeset()
-           |> Repo.insert(),
-         {:ok, _} <- Enqueuer.push({ProcessEventJob, id}) do
-      {:ok, event}
-    end
   end
 
   def add_repository(attrs) do
@@ -53,7 +36,7 @@ defmodule Fabion.Sources do
     Fabion.Sources.Repository
   end
 
-  defp repo_by_url(url) do
+  def repo_by_url(url) do
     with {:ok, github_repo} <- parse_repo(url),
          %Repository{} = repo <- Repo.get_by(Repository, github_repo: github_repo) do
       {:ok, repo}

@@ -1,15 +1,15 @@
-defmodule Fabion.Sources.RepositoryEventTest do
+defmodule Fabion.Builder.PipelineTest do
   use Fabion.DataCase, async: true
 
   alias Fabion.Accounts.GithubUser
   alias Fabion.Sources.Repository
-  alias Fabion.Sources.RepositoryEvent, as: Schema
+  alias Fabion.Builder.Pipeline, as: Schema
 
   describe to_string(Schema) do
     test "return error for invalid changeset attrs" do
       {:error, %{errors: errors}} = Schema.changeset(%{}) |> Repo.insert()
 
-      requireds = [:params, :type, :repository_id, :sender_id]
+      requireds = [:params, :from_type, :repository_id, :sender_id]
 
       for field <- requireds do
         assert_validate(:required, field, errors)
@@ -17,8 +17,10 @@ defmodule Fabion.Sources.RepositoryEventTest do
     end
 
     test "make a valid data with factory" do
+      params = read_file_event!("push_commit")
+
       resource =
-        params_with_assocs(:repository_event, %{type: :PULL_REQUEST})
+        params_with_assocs(:pipeline, %{params: params})
         |> Schema.changeset()
         |> Repo.insert!()
         |> Repo.preload([:repository, :sender])
@@ -30,9 +32,9 @@ defmodule Fabion.Sources.RepositoryEventTest do
       assert %GithubUser{} = resource.sender
     end
 
-    test "return error for invalidate params in push event" do
+    test "return error for invalidate params in push_event" do
       {:error, %{errors: errors, valid?: false}} =
-        params_with_assocs(:repository_event, %{type: :PUSH, params: %{}})
+        params_with_assocs(:pipeline, %{from_type: :PUSH_EVENT, params: %{}})
         |> Schema.changeset()
         |> Repo.insert()
 
@@ -42,19 +44,19 @@ defmodule Fabion.Sources.RepositoryEventTest do
       assert {:params, {"/: Required property head_commit was not present.", []}} in errors
     end
 
-    test "insert a push event if is valid" do
+    test "insert a push_event if is valid" do
       params = read_file_event!("push_commit")
 
       {:ok, %Schema{params: ^params}} =
-        params_with_assocs(:repository_event, %{type: :PUSH, params: params})
+        params_with_assocs(:pipeline, %{from_type: :PUSH_EVENT, params: params})
         |> Schema.changeset()
         |> Repo.insert()
 
       {:error, %{errors: errors, valid?: false}} =
         params
         |> Map.update!("repository", &Map.put(&1, "url", nil))
-        ~> Map.put(%{type: :PUSH}, :params, _)
-        ~> params_with_assocs(:repository_event, _)
+        ~> Map.put(%{from_type: :PUSH_EVENT}, :params, _)
+        ~> params_with_assocs(:pipeline, _)
         |> Schema.changeset()
         |> Repo.insert()
 

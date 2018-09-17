@@ -1,17 +1,17 @@
-defmodule Fabion.Sources.ProcessEventJob do
+defmodule Fabion.Builder.GetStagesJob do
   import ShorterMaps
 
   alias Fabion.Repo
   alias Fabion.Sources
-  alias Fabion.Sources.RepositoryEvent
+  alias Fabion.Builder.Pipeline
 
-  def perform(event_id) do
-    {:ok, event} = get_repository_event(event_id)
+  def perform(pipeline_id) do
+    {:ok, pipeline} = get_pipeline(pipeline_id)
     %{repository: ~M{github_repo}, params: %{
       "head_commit" => %{
         "id" => commit_sha
       }
-    }} = event
+    }} = pipeline
 
     case Sources.get_file(github_repo, commit_sha, "./fabion.yaml") do
       {:ok, content} ->
@@ -21,9 +21,9 @@ defmodule Fabion.Sources.ProcessEventJob do
     end
   end
 
-  defp get_repository_event(id) do
-    case Repo.get(RepositoryEvent, id) do
-      %RepositoryEvent{} = r -> {:ok, r |> Repo.preload(:repository)}
+  defp get_pipeline(id) do
+    case Repo.get(Pipeline, id) do
+      %Pipeline{} = r -> {:ok, r |> Repo.preload(:repository)}
       _ -> {:error, :not_found}
     end
   end

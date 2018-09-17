@@ -1,16 +1,16 @@
-defmodule Fabion.Sources.ProcessEventJobTest do
+defmodule Fabion.Builder.GetStagesJobTest do
   use Fabion.DataCase, async: true
 
   import Mox
-  alias Fabion.Sources.ProcessEventJob, as: Job
+  alias Fabion.Builder.GetStagesJob, as: Job
 
   describe to_string(__MODULE__) do
     setup do
-      event = repository_event_with_params(:PUSH, "push_commit")
-      %{repository: ~M{github_repo}, params: params} = event
+      pipeline = pipeline_with_params(:PUSH_EVENT, "push_commit")
+      %{repository: ~M{github_repo}, params: params} = pipeline
       sha = jq!(params, ".head_commit.id")
 
-      IO.inspect(~M{sha, github_repo})
+      # IO.inspect(~M{sha, github_repo})
 
       Fabion.MockSourcesAdapter
       |> expect(:client, 1, fn -> :client end)
@@ -24,12 +24,12 @@ defmodule Fabion.Sources.ProcessEventJobTest do
            """}
       end)
 
-      ~M{event}
+      ~M{pipeline}
     end
 
-    test "job gets fabion.yaml from repo", ~M{event} do
-      :ok = Job.perform(event.id)
-      # event |> IO.inspect()
+    test "job gets fabion.yaml from repo", ~M{pipeline} do
+      :ok = Job.perform(pipeline.id)
+      # pipeline |> IO.inspect()
       verify!()
     end
   end

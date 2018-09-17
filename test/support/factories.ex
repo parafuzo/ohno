@@ -6,6 +6,7 @@ defmodule Fabion.Factories do
 
   alias Fabion.Sources
   alias Fabion.Accounts
+  alias Fabion.Builder
 
   def repository_factory do
     github_repo = Faker.Internet.user_name() <> "/" <> Faker.Internet.domain_word()
@@ -30,25 +31,25 @@ defmodule Fabion.Factories do
     }
   end
 
-  def repository_event_factory do
+  def pipeline_factory do
     repository = build(:repository)
     sender = build(:github_user)
 
-    %Sources.RepositoryEvent{
-      type: Enum.random(Sources.RepositoryEventType.__enum_map__),
+    %Builder.Pipeline{
+      from_type: :PUSH_EVENT,
       params: %{},
       repository: repository,
       sender: sender,
     }
   end
 
-  def repository_event_with_params(type, params) do
-    params = read_file_event!("push_commit")
+  def pipeline_with_params(from_type, file) do
+    params = read_file_event!(file)
     {:ok, github_repo} =
       jq!(params, ".repository.url")
       |> Sources.parse_repo()
 
     repository = build(:repository, ~M{github_repo})
-    insert(:repository_event, ~M{type, params, repository})
+    insert(:pipeline, ~M{from_type, params, repository})
   end
 end

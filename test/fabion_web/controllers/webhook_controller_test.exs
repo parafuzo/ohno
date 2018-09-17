@@ -48,7 +48,7 @@ defmodule FabionWeb.WebhookControllerTest do
              )
     end
 
-    test "a push event, create a event", ~M{conn, push_commit, repo} do
+    test "a push event, create a pipeline", ~M{conn, push_commit, repo} do
       repo_id = repo.id
 
       response =
@@ -65,11 +65,11 @@ defmodule FabionWeb.WebhookControllerTest do
                response
              )
 
-      %{events: [event]} = repo |> Repo.preload(:events)
+      %{pipelines: [pipeline]} = repo |> Repo.preload(:pipelines)
 
-      assert event.id == jq!(response, ".result.id")
-      assert event.type == :PUSH
-      assert event.repository_id == repo_id
+      assert pipeline.id == jq!(response, ".result.id")
+      assert pipeline.from_type == :PUSH_EVENT
+      assert pipeline.repository_id == repo_id
     end
 
     test "a push event with invalid params return error", ~M{conn, push_commit} do
