@@ -52,4 +52,16 @@ defmodule Fabion.Factories do
     repository = build(:repository, ~M{github_repo})
     insert(:pipeline, ~M{from_type, params, repository})
   end
+
+  def stage_factory do
+    pipeline = build(:pipeline)
+
+    %Builder.Stage{
+      name: "test",
+      config_file: "./buildcloud.yaml",
+      cloudbuild_extras: %{},
+      config: %{},
+      pipeline: pipeline
+    }
+  end
 end

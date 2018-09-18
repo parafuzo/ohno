@@ -5,12 +5,13 @@ Docs:
   ☐ Traduzir essa lista de tarefas e o README para inglês
 
 Webhook:
-  ☐ Registrar um evento na base a partir do webhook
-    ☐ Criar ou atualizar o usuário com base no evento
-  ☐ Criar um pipeline a partir de um evento de push
+  ✔ Criar um pipeline com base no evento @done (9/17/2018, 5:43:04 PM)
+    ✔ Criar ou atualizar o usuário com base no evento @done (9/17/2018, 5:43:05 PM)
   ☐ Criar os stages com base no `fabio.yaml`
     ☐ Montar o stage com as informações do `yaml` de configuração
     ☐ Opção de criar o novo job para o stage
+    ☐ Salvar o dados do `yaml` no pipeline depois de obte-lo
+    ☐ Salvar o resultado de processamento no pipeline para exibir
   ☐ Criar o job com base no stage
     ☐ Rodar o job automaticamente no CloudBuild
     ☐ Linkar cada job ao ao build do CloudBuild

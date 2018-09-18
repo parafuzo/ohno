@@ -14,6 +14,7 @@ defmodule Fabion.Repo.Migrations.CreateBuilderPipeline do
     create table(:builder_pipeline, primary_key: false) do
       add :id, :binary_id, primary_key: true
       add :params, :map
+      add :errors, :map
       add :from_type, :pipeline_from_type
 
       add :repository_id, references(:sources_repositories, on_delete: :nothing, type: :binary_id)

@@ -39,4 +39,14 @@ defmodule Fabion.BaseSchema do
         add_error(changeset, root, "#{path}: #{message}")
     end)
   end
+
+  def errors_to_map(root, errors) do
+    Enum.reduce(errors, %{}, fn
+      {message, "#"}, acc ->
+        Map.put(acc, root, message)
+
+      {message, <<"#", path::binary>>}, acc ->
+        Map.put(acc, Path.join([root, path]), message)
+    end)
+  end
 end

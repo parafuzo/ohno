@@ -6,24 +6,27 @@ defmodule Fabion.Builder.Pipeline do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "builder_pipeline" do
-    field :params, :map
-    field :from_type, PipelineFromType
+    field(:params, :map)
+    field(:errors, :map, default: nil)
+    field(:from_type, PipelineFromType)
 
     belongs_to(:repository, Fabion.Sources.Repository)
     belongs_to(:sender, Fabion.Accounts.GithubUser)
+
+    has_many(:stages, Fabion.Builder.Stage)
 
     timestamps()
   end
 
   @required_fields [:params, :from_type, :repository_id, :sender_id]
-  @optional_fields []
+  @optional_fields [:errors]
 
   @doc false
   def changeset(pipeline, attrs) do
     pipeline
     |> cast(attrs, @required_fields ++ @optional_fields)
     |> validate_required(@required_fields)
-    |> validate_inclusion(:from_type, PipelineFromType.__enum_map__)
+    |> validate_inclusion(:from_type, PipelineFromType.__enum_map__())
     |> validate_params()
   end
 
@@ -34,8 +37,11 @@ defmodule Fabion.Builder.Pipeline do
   @push_schema load_schema(:push)
   defp validate_params(changeset, :PUSH_EVENT) do
     params = get_field(changeset, :params)
+
     case ExJsonSchema.Validator.validate(@push_schema, params) do
-      :ok -> changeset
+      :ok ->
+        changeset
+
       {:error, errors} ->
         add_json_errors(changeset, :params, errors)
     end

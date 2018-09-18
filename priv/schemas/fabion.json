@@ -1,0 +1,25 @@
+{
+    "type": "object",
+    "required": ["stages"],
+    "properties": {
+        "stages": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": ["name", "config"],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "config": {
+                        "type": "string"
+                    },
+                    "when": {
+                        "type": "string",
+                        "enum": ["AUTO", "MANUAL"]
+                    }
+                }
+            }
+        }
+    }
+}
