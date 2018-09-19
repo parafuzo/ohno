@@ -32,6 +32,7 @@
   "hackney": {:hex, :hackney, "1.13.0", "24edc8cd2b28e1c652593833862435c80661834f6c9344e84b6a2255e7aeef03", [:rebar3], [{:certifi, "2.3.1", [hex: :certifi, repo: "hexpm", optional: false]}, {:idna, "5.1.2", [hex: :idna, repo: "hexpm", optional: false]}, {:metrics, "1.0.1", [hex: :metrics, repo: "hexpm", optional: false]}, {:mimerl, "1.0.2", [hex: :mimerl, repo: "hexpm", optional: false]}, {:ssl_verify_fun, "1.1.1", [hex: :ssl_verify_fun, repo: "hexpm", optional: false]}], "hexpm"},
   "httpoison": {:hex, :httpoison, "1.3.0", "edfd6ca53b57377a7a8db226bc42a2bddfeb39951c61ddfe15ec930225e6e46b", [:mix], [{:hackney, "~> 1.8", [hex: :hackney, repo: "hexpm", optional: false]}], "hexpm"},
   "idna": {:hex, :idna, "5.1.2", "e21cb58a09f0228a9e0b95eaa1217f1bcfc31a1aaa6e1fdf2f53a33f7dbd9494", [:rebar3], [{:unicode_util_compat, "0.3.1", [hex: :unicode_util_compat, repo: "hexpm", optional: false]}], "hexpm"},
+  "indifferent": {:hex, :indifferent, "0.9.1", "99acffa8ca825b0280d3bdaa8b1ea8aa1851b5d1314d16b6e274d0bd82320f5b", [:mix], [], "hexpm"},
   "jqish": {:hex, :jqish, "0.1.2", "ec73d079e00ed3fbd7103849bb66be2e9bcdc4bbc966e8487ce153f316f83cb8", [:mix], [], "hexpm"},
   "json_web_token": {:hex, :json_web_token, "0.2.10", "61041d56369422c5e3a770cf7d7bf27224b3c4c12d3a7d79b43a002df766db22", [:mix], [{:poison, "~> 3.1", [hex: :poison, repo: "hexpm", optional: false]}], "hexpm"},
   "jsx": {:hex, :jsx, "2.8.3", "a05252d381885240744d955fbe3cf810504eb2567164824e19303ea59eef62cf", [:mix, :rebar3], [], "hexpm"},

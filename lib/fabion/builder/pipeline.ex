@@ -6,9 +6,11 @@ defmodule Fabion.Builder.Pipeline do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "builder_pipeline" do
-    field(:params, :map)
-    field(:errors, :map, default: nil)
     field(:from_type, PipelineFromType)
+    field(:params, :map)
+    field(:stages_groups, {:array, :string}, default: [])
+    field(:manifest, :map, default: nil)
+    field(:stages_errors, :map, default: nil)
 
     belongs_to(:repository, Fabion.Sources.Repository)
     belongs_to(:sender, Fabion.Accounts.GithubUser)
@@ -19,7 +21,7 @@ defmodule Fabion.Builder.Pipeline do
   end
 
   @required_fields [:params, :from_type, :repository_id, :sender_id]
-  @optional_fields [:errors]
+  @optional_fields [:stages_groups, :manifest, :stages_errors]
 
   @doc false
   def changeset(pipeline, attrs) do

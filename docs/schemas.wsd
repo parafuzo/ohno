@@ -69,6 +69,9 @@ namespace Builder #D0F4DE {
     *from_type: <i>PipelineFromType</i>
     ..
     +params: map
+    +manifest: map
+    +stages_groups: array.string
+    +stages_errors: map
   }
 
   Pipeline "1..*" -- "0..*" Sources.Repository
@@ -83,6 +86,7 @@ namespace Builder #D0F4DE {
     *when: <i>WhenType</i>
     ..
     +name: string
+    +stage_group: string
     +except: [string]
     +only: [string]
     +config_file: string

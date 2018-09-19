@@ -8,7 +8,6 @@ defmodule Fabion.Builder.GetStagesJob do
       errors_to_map: 2
     ]
 
-  alias Ecto.Multi
   alias ExJsonSchema.Validator
 
   alias Fabion.Repo
@@ -29,38 +28,49 @@ defmodule Fabion.Builder.GetStagesJob do
     } = pipeline
 
     with {:ok, content} <- Sources.get_file(github_repo, commit_sha, "./fabion.yaml"),
-         {:ok, config} <- YamlElixir.read_from_string(content),
-         :ok <- valid_config(config),
-         {:ok, _} <- make_stages(pipeline, config) do
+         {:ok, manifest} <- YamlElixir.read_from_string(content),
+          :ok <- validate_manifest(manifest),
+         {:ok, _} <- make_stages(pipeline, manifest) do
       :ok
     else
-      {:error, {:invalid_schema, errors}} ->
-        Pipeline.changeset(pipeline, ~M{errors})
-        |> Repo.update!
+      {:error, {:invalid_schema, stages_errors}} ->
+        Pipeline.changeset(pipeline, ~M{stages_errors})
+        |> Repo.update!()
         :error
-      other -> other
+      other ->
+        other
     end
   end
 
-  # TODO: save the execution order
-  # maybe with: https://github.com/coryodaniel/arbor
-  defp make_stages(%{id: pipeline_id}, ~m{stages}) do
-    stages
-    |> Enum.with_index()
-    |> Enum.reduce(Multi.new(), fn
-      {~m{name, config} = stage, index}, multi ->
-        ~M{pipeline_id, name, config: stage, config_file: config}
-        |> Stage.changeset()
-        ~> Multi.insert(Multi.new(), index, _)
-        |> Multi.append(multi)
+  defp make_stages(%Pipeline{} = pipeline, ~m{stages} = manifest) do
+    Repo.transaction(fn ->
+      Pipeline.changeset(pipeline, %{
+        stages_groups: stages,
+        manifest: manifest,
+      })
+      |> Repo.update!()
+
+      manifest =
+        manifest
+        |> Map.delete("stages")
+        |> Enum.to_list()
+
+      for {name, item} <- manifest do
+        Stage.changeset(%{
+          pipeline_id: pipeline.id,
+          name: name,
+          config: item,
+          stage_group: item["stage"],
+          config_file: item["config"],
+        })
+        |> Repo.insert!()
+      end
     end)
-    |> Repo.transaction()
   end
 
   @fabion_schema load_schema(:fabion)
-
-  defp valid_config(config) do
-    with {:error, errors} <- Validator.validate(@fabion_schema, config) do
+  defp validate_manifest(manifest) do
+    with {:error, errors} <- Validator.validate(@fabion_schema, manifest) do
       {:error, {:invalid_schema, errors_to_map("fabion", errors)}}
     end
   end

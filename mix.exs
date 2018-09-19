@@ -43,6 +43,7 @@ defmodule Fabion.Mixfile do
       {:pipe_to, "~> 0.2.0"},
       {:shorter_maps, "~> 2.2"},
       {:jqish, "~> 0.1.2", only: :test},
+      {:indifferent, "~> 0.9.1"},
 
       # Phoenix Framewokr
       {:phoenix, "~> 1.3.3"},

@@ -13,8 +13,9 @@ defmodule Fabion.Repo.Migrations.CreateBuilderStage do
 
     create table(:builder_stage, primary_key: false) do
       add :id, :binary_id, primary_key: true
-      add :when, :when_type
       add :name, :string
+      add :stage_group, :string
+      add :when, :when_type
       add :except, {:array, :string}
       add :only, {:array, :string}
       add :config_file, :string

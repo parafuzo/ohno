@@ -5,20 +5,20 @@
         "stages": {
             "type": "array",
             "items": {
-                "type": "object",
-                "required": ["name", "config"],
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "config": {
-                        "type": "string"
-                    },
-                    "when": {
-                        "type": "string",
-                        "enum": ["AUTO", "MANUAL"]
-                    }
-                }
+                "type": "string"
+            }
+        }
+    },
+    "additionalProperties": {
+        "type": "object",
+        "required": ["config", "stage"],
+        "additionalProperties": false,
+        "properties": {
+            "config": {
+                "type": "string"
+            },
+            "stage": {
+                "type": "string"
             }
         }
     }

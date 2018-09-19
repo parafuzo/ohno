@@ -58,6 +58,7 @@ defmodule Fabion.Factories do
 
     %Builder.Stage{
       name: "test",
+      stage_group: "test",
       config_file: "./buildcloud.yaml",
       cloudbuild_extras: %{},
       config: %{},

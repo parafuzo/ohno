@@ -7,6 +7,7 @@ defmodule Fabion.Builder.Stage do
   @foreign_key_type :binary_id
   schema "builder_stage" do
     field(:name, :string)
+    field(:stage_group, :string)
     field(:when, WhenType, default: :AUTO)
     field(:except, {:array, :string}, default: [])
     field(:only, {:array, :string}, default: [])
@@ -19,7 +20,7 @@ defmodule Fabion.Builder.Stage do
     timestamps()
   end
 
-  @required_fields [:pipeline_id, :name, :config_file, :config]
+  @required_fields [:pipeline_id, :name, :stage_group, :config_file, :config]
   @optional_fields [:when, :except, :only, :cloudbuild_extras]
 
   @doc false

@@ -1,73 +1,46 @@
 {
     "type": "object",
-    "title": "Push event params",
-    "required": [
-        "sender",
-        "repository",
-        "ref",
-        "head_commit"
-    ],
+    "required": ["sender", "repository", "ref", "head_commit"],
     "properties": {
         "sender": {
             "type": "object",
-            "title": "Push sender",
-            "required": [
-                "node_id",
-                "login",
-                "html_url",
-                "avatar_url"
-            ],
+            "required": ["node_id", "login", "html_url", "avatar_url"],
             "properties": {
                 "node_id": {
-                    "type": "string",
-                    "title": "The Node_id Schema"
+                    "type": "string"
                 },
                 "login": {
-                    "type": "string",
-                    "title": "The Login Schema"
+                    "type": "string"
                 },
                 "html_url": {
-                    "type": "string",
-                    "title": "The Html_url Schema"
+                    "type": "string"
                 },
                 "avatar_url": {
-                    "type": "string",
-                    "title": "The Avatar_url Schema"
+                    "type": "string"
                 }
             }
         },
         "repository": {
             "type": "object",
-            "title": "The Repository Schema",
-            "required": [
-                "url"
-            ],
+            "required": ["url"],
             "properties": {
                 "url": {
-                    "type": "string",
-                    "title": "The Url Schema"
+                    "type": "string"
                 }
             }
         },
         "ref": {
-            "type": "string",
-            "title": "The Ref Schema"
+            "type": "string"
         },
         "head_commit": {
             "type": "object",
-            "title": "The Head_commit Schema",
-            "required": [
-                "message",
-                "id"
-            ],
+            "required": ["message", "id"],
             "properties": {
                 "message": {
-                    "type": "string",
-                    "title": "The Message Schema"
+                    "type": "string"
                 },
                 "id": {
-                    "type": "string",
-                    "title": "The Id Schema"
+                    "type": "string"
                 }
             }
         }
