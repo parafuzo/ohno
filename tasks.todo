@@ -18,6 +18,10 @@ Webhook:
     ☐ Notificar cada mudança de estado do job para o github
     ☐ Opção de rodar o job manualmente
 
+Stages:
+  ☐ Use stage name to group stage (only support one for file)
+  ☐ Validate group stage name before insert
+
 Melhorias:
   ☐ Verificar e aguardar pelo código no "repositório espelho"
   ☐ Suportar a criação de pipeline a partir
