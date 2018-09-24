@@ -19,8 +19,8 @@ Webhook:
     ☐ Opção de rodar o job manualmente
 
 Stages:
-  ☐ Use stage name to group stage (only support one for file)
-  ☐ Validate group stage name before insert
+  ✔ Use stage name to group stage (only support one for file) @done (9/21/2018, 4:35:11 PM)
+  ✔ Validate group stage name before insert @done (9/24/2018, 2:27:52 PM)
 
 Melhorias:
   ☐ Verificar e aguardar pelo código no "repositório espelho"

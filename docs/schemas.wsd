@@ -91,7 +91,7 @@ namespace Builder #D0F4DE {
     +only: [string]
     +config_file: string
     +config: map
-    +cloudbuild_extras: map
+    +cloudbuild: map
   }
 
   Stage "1..*" -- "0..*" Pipeline

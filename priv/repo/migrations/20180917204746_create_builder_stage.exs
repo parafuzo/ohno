@@ -20,7 +20,7 @@ defmodule Fabion.Repo.Migrations.CreateBuilderStage do
       add :only, {:array, :string}
       add :config_file, :string
       add :config, :map
-      add :cloudbuild_extras, :map
+      add :cloudbuild, :map
       add :pipeline_id, references(:builder_pipeline, on_delete: :nothing, type: :binary_id)
 
       timestamps()

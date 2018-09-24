@@ -30,7 +30,9 @@ defmodule Fabion.Sources.GithubAdapter do
       [@raw_url, repo, ref, path]
       |> Path.join()
 
-    get(client, url) |> response()
+    with {:error, %Tesla.Env{status: 404}} <- get(client, url) |> response do
+      {:error, :not_found_file}
+    end
   end
 
   defp config(key) do

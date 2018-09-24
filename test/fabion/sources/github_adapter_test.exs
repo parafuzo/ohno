@@ -47,6 +47,11 @@ defmodule Fabion.Sources.GithubAdapterTest do
 
         assert file_content =~ ~r/# Fabio/
       end
+
+      use_cassette "github_get_not_found file" do
+        {:error, :not_found_file} =
+          GithubAdapter.get_file(client, "nuxlli/fabion", "master", "./invalid_file.md")
+      end
     end
   end
 end

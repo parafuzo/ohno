@@ -23,6 +23,10 @@ defmodule Fabion.Builder.Pipeline do
   @required_fields [:params, :from_type, :repository_id, :sender_id]
   @optional_fields [:stages_groups, :manifest, :stages_errors]
 
+  def get_refs(%__MODULE__{params: params}) do
+    get_in(params, ["head_commit", "id"])
+  end
+
   @doc false
   def changeset(pipeline, attrs) do
     pipeline

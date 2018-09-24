@@ -11,7 +11,7 @@
     },
     "additionalProperties": {
         "type": "object",
-        "required": ["config", "stage"],
+        "required": ["config"],
         "additionalProperties": false,
         "properties": {
             "config": {

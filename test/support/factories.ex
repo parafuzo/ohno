@@ -16,7 +16,7 @@ defmodule Fabion.Factories do
       gcloud_repo: gcloud,
       github_repo: github_repo,
       github_secret: Ecto.UUID.generate(),
-      github_token: Ecto.UUID.generate(),
+      github_token: Ecto.UUID.generate()
     }
   end
 
@@ -27,7 +27,7 @@ defmodule Fabion.Factories do
       node_id: Base.encode64("04:User#{user_id}"),
       login: Faker.Internet.user_name(),
       html_url: Faker.Internet.url(),
-      avatar_url: Faker.Internet.url(),
+      avatar_url: Faker.Internet.url()
     }
   end
 
@@ -39,12 +39,13 @@ defmodule Fabion.Factories do
       from_type: :PUSH_EVENT,
       params: %{},
       repository: repository,
-      sender: sender,
+      sender: sender
     }
   end
 
   def pipeline_with_params(from_type, file) do
     params = read_file_event!(file)
+
     {:ok, github_repo} =
       jq!(params, ".repository.url")
       |> Sources.parse_repo()
@@ -60,7 +61,7 @@ defmodule Fabion.Factories do
       name: "test",
       stage_group: "test",
       config_file: "./buildcloud.yaml",
-      cloudbuild_extras: %{},
+      cloudbuild: %{},
       config: %{},
       pipeline: pipeline
     }

@@ -1,5 +1,5 @@
 defmodule Fabion.Builder.GetStagesJobTest do
-  use Fabion.DataCase, async: true
+  use Fabion.DataCase, async: false
 
   import Indifferent.Sigils
   # require Indifferent
@@ -10,29 +10,42 @@ defmodule Fabion.Builder.GetStagesJobTest do
   alias Fabion.Builder.GetStagesJob, as: Job
 
   describe "extract stages from pipeline" do
+    setup :set_mox_from_context
+
     setup do
       pipeline = pipeline_with_params(:PUSH_EVENT, "push_commit")
       ~M{pipeline}
     end
 
-    setup :verify_on_exit!
+    @good_case %{
+      "./fabion.yaml" => """
+        stages:
+          - test
+          - release
+
+        test:
+          config: ./cloudbuild/test.yaml
+
+        release:
+          stage: release
+          config: ./cloudbuild/release.yaml
+      """,
+      "./cloudbuild/test.yaml" => """
+        steps:
+          - name: gcr.io/cloud-builders/gcloud
+            entrypoint: /bin/bash
+            args: ['-c', 'echo "test stage"']
+      """,
+      "./cloudbuild/release.yaml" => """
+        steps:
+          - name: gcr.io/cloud-builders/gcloud
+            entrypoint: /bin/bash
+            args: ['-c', 'echo "release stage"']
+      """
+    }
 
     test "get fabion.yaml from repo and create stages", ~M{pipeline} do
-      {:ok, manifest} =
-        mock_adapter(pipeline, """
-          stages:
-            - test
-            - release
-
-          test:
-            stage: test
-            config: ./cloudbuild/test.yaml
-
-          release:
-            stage: release
-            config: ./cloudbuild/release.yaml
-        """)
-
+      {:ok, %{"./fabion.yaml" => manifest}} = mock_adapter(pipeline, @good_case)
 
       %{stages: []} = pipeline |> Repo.preload(:stages)
       :ok = Job.perform(pipeline.id)
@@ -40,21 +53,35 @@ defmodule Fabion.Builder.GetStagesJobTest do
       pipeline = Repo.get(Pipeline, pipeline.id) |> Repo.preload(:stages)
 
       groups = manifest |> ~i(stages)
+
       assert %Pipeline{
                stages_groups: ^groups,
                manifest: ^manifest
              } = pipeline
 
-      manifest_stages = get_in(manifest, [&stages/3]) |> Enum.to_list()
+      manifest_stages = manifest |> Map.drop(["stages"]) |> Enum.to_list()
       assert length(manifest_stages) == length(pipeline.stages)
 
       for {name, item} <- manifest_stages do
         stage = Repo.get_by(Stage, name: name, pipeline_id: pipeline.id)
 
         assert not is_nil(stage)
-        assert stage.stage_group == item["stage"]
+        assert stage.stage_group == item["stage"] || name
         assert stage.config_file == item["config"]
       end
+    end
+
+    test "get stages config files and save in stage", ~M{pipeline} do
+      {:ok,
+       %{
+         "./cloudbuild/test.yaml" => test_config
+       }} = mock_adapter(pipeline, @good_case)
+
+      :ok = Job.perform(pipeline.id)
+      %{stages: [stage | _]} = Repo.get(Pipeline, pipeline.id) |> Repo.preload(:stages)
+
+      assert stage.name == "test"
+      assert stage.cloudbuild == test_config
     end
 
     test "valid yaml and save errors in pipeline", ~M{pipeline} do
@@ -73,28 +100,70 @@ defmodule Fabion.Builder.GetStagesJobTest do
       assert {"fabion/test/stage", "Type mismatch. Expected String but got Integer."} in errors
     end
 
-    def stages(:get, data, next) do
-      data
-      |> Enum.filter(fn
-        {_, %{"stage" => _}} -> true
-        _ -> false
-      end)
-      |> Map.new()
-      |> next.()
+    test "return error if not found config file", ~M{pipeline} do
+      config_file = "./cloudbuild/test.yaml"
+      refs = Pipeline.get_refs(pipeline)
+
+      mock_adapter(pipeline, """
+        stages:
+          - test
+
+        test:
+          config: #{config_file}
+      """)
+
+      :error = Job.perform(pipeline.id)
+      %Pipeline{stages_errors: errors} = Repo.get(Pipeline, pipeline.id)
+      errors = errors |> Map.to_list()
+
+      message = "Error to get file #{config_file}: Not found in repository for #{refs} refs"
+      assert {"config_file", message} in errors
     end
 
-    def mock_adapter(pipeline, content) do
+    test "validate stages groups before create stage", ~M{pipeline} do
+      mock_adapter(pipeline, """
+        stages:
+          - test
+
+        test:
+          config: ./cloudbuild/test.yaml
+
+        release:
+          stage: release
+          config: ./cloudbuild/release.yaml
+      """)
+
+      :error = Job.perform(pipeline.id)
+      %Pipeline{stages_errors: errors} = Repo.get(Pipeline, pipeline.id)
+      errors = errors |> Map.to_list()
+
+      assert {"fabion/release/stage", "Stage group release is missing in stages."} in errors
+    end
+
+    def mock_adapter(pipeline, content) when is_bitstring(content) do
+      mock_adapter(pipeline, %{"./fabion.yaml" => content})
+    end
+
+    def mock_adapter(pipeline, %{} = files) do
       %{repository: ~M{github_repo}, params: params} = pipeline
       sha = jq!(params, ".head_commit.id")
 
       Fabion.MockSourcesAdapter
-      |> expect(:client, 1, fn -> :client end)
-      |> expect(:get_file, 1, fn
-        :client, ^github_repo, ^sha, "./fabion.yaml" ->
-          {:ok, content}
+      |> stub(:client, fn -> :client end)
+      |> stub(:get_file, fn :client, ^github_repo, ^sha, path ->
+        case Map.get(files, path) do
+          nil -> {:error, :not_found_file}
+          content -> {:ok, content}
+        end
       end)
 
-      YamlElixir.read_from_string(content)
+      yamls = files |> Enum.map(&yaml_to_map/1) |> Map.new()
+      {:ok, yamls}
+    end
+
+    def yaml_to_map({path, content}) do
+      {:ok, yaml} = YamlElixir.read_from_string(content)
+      {path, yaml}
     end
   end
 end

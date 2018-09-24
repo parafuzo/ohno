@@ -13,7 +13,7 @@ defmodule Fabion.Builder.Stage do
     field(:only, {:array, :string}, default: [])
     field(:config_file, :string)
     field(:config, :map)
-    field(:cloudbuild_extras, :map, default: %{})
+    field(:cloudbuild, :map, default: %{})
 
     belongs_to(:pipeline, Fabion.Builder.Pipeline)
 
@@ -21,7 +21,7 @@ defmodule Fabion.Builder.Stage do
   end
 
   @required_fields [:pipeline_id, :name, :stage_group, :config_file, :config]
-  @optional_fields [:when, :except, :only, :cloudbuild_extras]
+  @optional_fields [:when, :except, :only, :cloudbuild]
 
   @doc false
   def changeset(stage, attrs) do
