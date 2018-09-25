@@ -48,6 +48,8 @@ namespace Builder #D0F4DE {
     <b>FAILED_NOTIFIED</b>
     <b>CANCELLED</b>
     <b>CANCELLED_NOTIFIED</b>
+    <b>SUCCESS</b>
+    <b>SUCCESS_NOTIFIED</b>
   }
 
   enum WhenType {
@@ -102,9 +104,10 @@ namespace Builder #D0F4DE {
     +inserted_at: <b>timestamp</b>
     +updated_at: <b>timestamp</b>
     ..
-    *status: <i>JobStatus</i>
     *gcloud_build_id: <i>GoogleCloudBuild.Build</i>
+    *stage: <i>Stage</i>
     ..
+    *status: <i>JobStatus</i>
   }
 
   Job --# JobStatus

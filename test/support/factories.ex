@@ -32,14 +32,16 @@ defmodule Fabion.Factories do
   end
 
   def pipeline_factory do
-    repository = build(:repository)
-    sender = build(:github_user)
-
     %Builder.Pipeline{
       from_type: :PUSH_EVENT,
       params: %{},
-      repository: repository,
-      sender: sender
+      repository: build(:repository),
+      sender: build(:github_user),
+      stages_groups: [
+        "test",
+        "release",
+        "deploy"
+      ]
     }
   end
 
@@ -55,15 +57,20 @@ defmodule Fabion.Factories do
   end
 
   def stage_factory do
-    pipeline = build(:pipeline)
-
     %Builder.Stage{
       name: "test",
       stage_group: "test",
       config_file: "./buildcloud.yaml",
       cloudbuild: %{},
       config: %{},
-      pipeline: pipeline
+      pipeline: build(:pipeline)
+    }
+  end
+
+  def job_factory do
+    %Builder.Job{
+      stage: build(:stage),
+      gcloud_build_id: Ecto.UUID.generate()
     }
   end
 end

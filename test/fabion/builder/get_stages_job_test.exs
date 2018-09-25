@@ -92,7 +92,10 @@ defmodule Fabion.Builder.GetStagesJobTest do
       """)
 
       :error = Job.perform(pipeline.id)
-      %Pipeline{stages_errors: errors} = Repo.get(Pipeline, pipeline.id)
+
+      %Pipeline{stages_errors: errors, stages: []} =
+        Repo.get(Pipeline, pipeline.id) |> Repo.preload(:stages)
+
       errors = errors |> Map.to_list()
       assert {"fabion", "Required property stages was not present."} in errors
       assert {"fabion/test", "Required property config was not present."} in errors
@@ -113,7 +116,10 @@ defmodule Fabion.Builder.GetStagesJobTest do
       """)
 
       :error = Job.perform(pipeline.id)
-      %Pipeline{stages_errors: errors} = Repo.get(Pipeline, pipeline.id)
+
+      %Pipeline{stages_errors: errors, stages: []} =
+        Repo.get(Pipeline, pipeline.id) |> Repo.preload(:stages)
+
       errors = errors |> Map.to_list()
 
       message = "Error to get file #{config_file}: Not found in repository for #{refs} refs"
@@ -134,7 +140,10 @@ defmodule Fabion.Builder.GetStagesJobTest do
       """)
 
       :error = Job.perform(pipeline.id)
-      %Pipeline{stages_errors: errors} = Repo.get(Pipeline, pipeline.id)
+
+      %Pipeline{stages_errors: errors, stages: []} =
+        Repo.get(Pipeline, pipeline.id) |> Repo.preload(:stages)
+
       errors = errors |> Map.to_list()
 
       assert {"fabion/release/stage", "Stage group release is missing in stages."} in errors

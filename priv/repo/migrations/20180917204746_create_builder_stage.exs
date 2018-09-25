@@ -11,7 +11,7 @@ defmodule Fabion.Repo.Migrations.CreateBuilderStage do
       "DROP TYPE when_type"
     )
 
-    create table(:builder_stage, primary_key: false) do
+    create table(:builder_stages, primary_key: false) do
       add :id, :binary_id, primary_key: true
       add :name, :string
       add :stage_group, :string
@@ -26,6 +26,6 @@ defmodule Fabion.Repo.Migrations.CreateBuilderStage do
       timestamps()
     end
 
-    create index(:builder_stage, [:pipeline_id])
+    create index(:builder_stages, [:pipeline_id])
   end
 end
