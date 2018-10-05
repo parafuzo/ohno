@@ -5,6 +5,7 @@ defmodule Fabion.Sources.Repository do
   @foreign_key_type :binary_id
   schema "sources_repositories" do
     field :gcloud_repo, :string
+    field :gcloud_project_id, :string
     field :github_repo, :string
     field :github_secret, :string
     field :github_token, :string
@@ -14,12 +15,15 @@ defmodule Fabion.Sources.Repository do
     timestamps()
   end
 
+  @required_fields [:gcloud_repo, :gcloud_project_id, :github_repo, :github_secret, :github_token]
+  @optional_fields []
+
   @doc false
   def changeset(repository, attrs) do
     repository
-    |> cast(attrs, [:github_repo, :gcloud_repo, :github_secret, :github_token])
+    |> cast(attrs, @required_fields ++ @optional_fields)
     |> maybe_generate_secret()
-    |> validate_required([:github_repo, :gcloud_repo, :github_secret, :github_token])
+    |> validate_required(@required_fields)
   end
 
   def maybe_generate_secret(changeset) do

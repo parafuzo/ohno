@@ -8,6 +8,7 @@ defmodule Fabion.Sources.GithubAdapter do
   plug(Tesla.Middleware.BaseUrl, "https://api.github.com")
   plug(Tesla.Middleware.JSON, engine: Poison)
 
+  # TODO: get token from Fabion.Sources.Repository
   def client() do
     Tesla.build_client([
       {Tesla.Middleware.Headers,

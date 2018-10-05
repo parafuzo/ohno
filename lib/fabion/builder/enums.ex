@@ -6,14 +6,14 @@ alias Fabion.Builder.JobStatus
 
 defenum(JobStatus, :job_status, [
   :NEW,
-  :RUNNING,
-  :RUNNING_NOTIFIED,
-  :FAILED,
-  :FAILED_NOTIFIED,
-  :CANCELLED,
-  :CANCELLED_NOTIFIED,
+  :STATUS_UNKNOWN,
+  :QUEUED,
+  :WORKING,
   :SUCCESS,
-  :SUCCESS_NOTIFIED,
+  :FAILURE,
+  :INTERNAL_ERROR,
+  :TIMEOUT,
+  :CANCELLED
 ])
 
 defenum(PipelineFromType, :pipeline_from_type, [

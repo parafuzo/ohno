@@ -66,7 +66,7 @@ defmodule Fabion.BuilderTest do
       assert job2.stage_id == test2.id
 
       Builder.set_status!(job1, :SUCCESS)
-      Builder.set_status!(job2, :RUNNING_NOTIFIED)
+      Builder.set_status!(job2, :WORKING)
 
       {:ok, []} = Builder.make_jobs(pipeline)
 

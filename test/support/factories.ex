@@ -10,10 +10,12 @@ defmodule Fabion.Factories do
 
   def repository_factory do
     github_repo = Faker.Internet.user_name() <> "/" <> Faker.Internet.domain_word()
+
     gcloud = Slug.slugify("github-" <> github_repo, separator: ?-)
 
     %Sources.Repository{
       gcloud_repo: gcloud,
+      gcloud_project_id: gcloud,
       github_repo: github_repo,
       github_secret: Ecto.UUID.generate(),
       github_token: Ecto.UUID.generate()

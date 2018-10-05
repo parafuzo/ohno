@@ -9,6 +9,22 @@ defmodule Fabion.Sources do
   alias Fabion.Repo
   alias Fabion.Sources.Repository
 
+  @states %{
+    [:NEW, :STATUS_UNKNOWN, :QUEUED, :WORKING] => "pending",
+    [:SUCCESS] => "success",
+    [:FAILURE, :TIMEOUT, :CANCELLED] => "failure",
+    [:INTERNAL_ERROR] => "error"
+  }
+
+  def job_state(%{status: status}) do
+    @states
+    |> Enum.find(fn {opts, _} -> Enum.any?(opts, &(&1 == status)) end)
+    |> case do
+      {_, state} -> state
+      nil -> nil
+    end
+  end
+
   def statuses(repo, commit_sha, parameters) do
     @adapter.client()
     |> @adapter.statuses(repo, commit_sha, parameters)

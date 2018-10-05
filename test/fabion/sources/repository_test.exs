@@ -11,7 +11,7 @@ defmodule Fabion.Sources.RepositoryTest do
       {:error, %{errors: errors}} =
         Schema.changeset(%{}) |> Repo.insert
 
-      requireds = [:github_repo, :gcloud_repo, :github_token]
+      requireds = [:gcloud_repo, :gcloud_project_id, :github_repo, :github_token]
       for field <- requireds do
         assert_validate(:required, field, errors)
       end

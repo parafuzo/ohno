@@ -14,8 +14,7 @@ defmodule Fabion.Builder.Job do
     timestamps()
   end
 
-  @success_status [:SUCCESS, :SUCCESS_NOTIFIED]
-  def success?(%__MODULE__{status: status}) when status in @success_status, do: true
+  def success?(%__MODULE__{status: :SUCCESS}), do: true
   def success?(_), do: false
 
   @required_fields [:stage_id, :status]

@@ -3,6 +3,7 @@ defmodule FabionWeb.Graphql.Sources.Types do
 
   node object :repository do
     field :gcloud_repo, non_null(:string)
+    field :gcloud_project_id, non_null(:string)
     field :github_repo, non_null(:string)
     field :github_secret, non_null(:string)
     field :github_token, non_null(:string)
