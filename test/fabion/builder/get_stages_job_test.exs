@@ -6,6 +6,10 @@ defmodule Fabion.Builder.GetStagesJobTest do
 
   import Mox
 
+  import GenQueue.Test
+  alias Fabion.Enqueuer
+  alias Fabion.Builder.ProcessJob
+
   alias Fabion.Builder.{Pipeline, Stage}
   alias Fabion.Builder.GetStagesJob, as: Job
 
@@ -82,6 +86,17 @@ defmodule Fabion.Builder.GetStagesJobTest do
 
       assert stage.name == "test"
       assert stage.cloudbuild == test_config
+    end
+
+    test "make job for stage after create stages", ~M{pipeline} do
+      :ok = setup_test_queue(Enqueuer)
+      {:ok, %{}} = mock_adapter(pipeline, @good_case)
+
+      :ok = Job.perform(pipeline.id)
+      %{stages: [stage | _]} = Repo.get(Pipeline, pipeline.id) |> Repo.preload(stages: [:jobs])
+
+      %Stage{jobs: [%Fabion.Builder.Job{id: job_id}]} = stage
+      assert_receive(%GenQueue.Job{module: ProcessJob, args: [%{id: ^job_id}]})
     end
 
     test "valid yaml and save errors in pipeline", ~M{pipeline} do

@@ -1,6 +1,7 @@
 defmodule Fabion.Builder do
   import ShorterMaps
 
+  require Logger
   import Ecto.Query
 
   alias Fabion.Repo
@@ -17,12 +18,13 @@ defmodule Fabion.Builder do
   def add_pipeline("push", %{"repository" => ~m{url}, "sender" => sender} = params) do
     with {:ok, %{id: repository_id}} <- Sources.repo_by_url(url),
          {:ok, %{id: sender_id}} <- Accounts.user_from_sender(sender),
-         {:ok, ~M{id} = event} <-
+         {:ok, ~M{id} = pipeline} <-
            ~M{from_type: :PUSH_EVENT, repository_id, sender_id, params}
            |> Pipeline.changeset()
            |> Repo.insert(),
          {:ok, _} <- Enqueuer.push({GetStagesJob, id}) do
-      {:ok, event}
+      Logger.info("Adding pipeline #{inspect(pipeline)}")
+      {:ok, pipeline}
     end
   end
 

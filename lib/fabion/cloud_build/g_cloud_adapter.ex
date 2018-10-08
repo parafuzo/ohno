@@ -1,6 +1,8 @@
 defmodule Fabion.CloudBuild.GCloudAdapter do
   @behaviour Fabion.CloudBuild.Adapter
 
+  require Logger
+
   alias Fabion.CloudBuild.Client
   alias Fabion.Sources.Repository
 
@@ -57,6 +59,9 @@ defmodule Fabion.CloudBuild.GCloudAdapter do
          method,
          args
        ) do
+
+    Logger.debug("Call GCloud.Projects, #{method}: #{inspect(args)} ")
+
     apply(Projects, method, [conn, project_id | args])
   end
 end

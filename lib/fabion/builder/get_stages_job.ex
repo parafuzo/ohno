@@ -19,7 +19,8 @@ defmodule Fabion.Builder.GetStagesJob do
 
     with {:ok, manifest} <- get_yaml(pipeline, "./fabion.yaml"),
          :ok <- validate_manifest(manifest),
-         {:ok, _} <- make_stages(pipeline, manifest) do
+         {:ok, _} <- make_stages(pipeline, manifest),
+         {:ok, _} <- Fabion.Builder.make_jobs(pipeline) do
       :ok
     else
       {:error, {:invalid_schema, stages_errors}} ->

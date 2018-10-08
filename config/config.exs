@@ -38,7 +38,8 @@ config :goth,
 
 config :fabion, Fabion.Sources,
   adapter: Fabion.Sources.GithubAdapter,
-  auth_token: {:system, :string, "FABION_GITHUB_TOKE"}
+  auth_token: {:system, :string, "FABION_GITHUB_TOKE"},
+  target_url: {:system, :string, "FABION_GITHUB_TARGET_URL"}
 
 config :fabion, Fabion.CloudBuild,
   adapter: Fabion.CloudBuild.GCloudAdapter

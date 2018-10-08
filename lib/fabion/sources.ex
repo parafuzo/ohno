@@ -35,6 +35,10 @@ defmodule Fabion.Sources do
     |> @adapter.get_file(repo, commit_sha, path)
   end
 
+  def target_url() do
+    Keyword.get(Application.get_env(:fabion, __MODULE__), :target_url)
+  end
+
   def add_repository(attrs) do
     attrs
     |> Repository.changeset()

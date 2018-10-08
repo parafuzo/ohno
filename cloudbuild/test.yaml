@@ -1,4 +1,4 @@
 steps:
   - name: gcr.io/cloud-builders/gcloud
     entrypoint: /bin/bash
-    args: ['-c', 'echo "hello world"']
+    args: ['-c', 'echo "test stage"']
