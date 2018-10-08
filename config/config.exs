@@ -40,6 +40,9 @@ config :fabion, Fabion.Sources,
   adapter: Fabion.Sources.GithubAdapter,
   auth_token: {:system, :string, "FABION_GITHUB_TOKE"}
 
+config :fabion, Fabion.CloudBuild,
+  adapter: Fabion.CloudBuild.GCloudAdapter
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
