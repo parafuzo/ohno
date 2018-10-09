@@ -19,7 +19,7 @@ defmodule Fabion.Builder.GetStagesJob do
 
     with {:ok, manifest} <- get_yaml(pipeline, "./fabion.yaml"),
          :ok <- validate_manifest(manifest),
-         {:ok, _} <- make_stages(pipeline, manifest),
+         {:ok, pipeline} <- make_stages(pipeline, manifest),
          {:ok, _} <- Fabion.Builder.make_jobs(pipeline) do
       :ok
     else
@@ -41,11 +41,12 @@ defmodule Fabion.Builder.GetStagesJob do
   end
 
   defp make_transation(%Pipeline{} = pipeline, ~m{stages} = manifest) do
-    Pipeline.changeset(pipeline, %{
-      stages_groups: stages,
-      manifest: manifest
-    })
-    |> Repo.update!()
+    pipeline =
+      Pipeline.changeset(pipeline, %{
+        stages_groups: stages,
+        manifest: manifest
+      })
+      |> Repo.update!()
 
     manifest
     |> Map.delete("stages")
@@ -57,10 +58,13 @@ defmodule Fabion.Builder.GetStagesJob do
       attrs -> Stage.changeset(attrs)
     end)
     |> Enum.each(&Repo.insert!/1)
+
+    pipeline
   end
 
   defp validate_stage(pipeline, stages, {name, item}) do
     stage_group = item["stage"] || name
+
     if not (stage_group in stages) do
       message = "Stage group #{stage_group} is missing in stages."
       errors = %{"fabion/#{name}/stage" => message}
@@ -81,6 +85,7 @@ defmodule Fabion.Builder.GetStagesJob do
     case get_yaml(pipeline, config_file) do
       {:ok, cloudbuild} ->
         Map.put(stage, :cloudbuild, cloudbuild)
+
       {:error, error} ->
         errors = %{"config_file" => "Error to get file #{config_file}: #{error}"}
         {:error, {:invalid_schema, errors}}
@@ -88,15 +93,18 @@ defmodule Fabion.Builder.GetStagesJob do
   end
 
   defp get_yaml(pipeline, file) do
-    %{ repository: ~M{github_repo} } = pipeline
+    %{repository: ~M{github_repo}} = pipeline
     commit_sha = Pipeline.get_refs(pipeline)
 
     case Sources.get_file(github_repo, commit_sha, file) do
       {:ok, content} when is_bitstring(content) ->
         YamlElixir.read_from_string(content)
+
       {:error, :not_found_file} ->
         {:error, "Not found in repository for #{commit_sha} refs"}
-      other -> other
+
+      other ->
+        other
     end
   end
 
