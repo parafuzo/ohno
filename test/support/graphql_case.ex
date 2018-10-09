@@ -1,29 +1,29 @@
-defmodule FabionWeb.GraphqlCase do
+defmodule OhnoWeb.GraphqlCase do
   use ExUnit.CaseTemplate
 
-  alias FabionWeb.Graphql.Schema
+  alias OhnoWeb.Graphql.Schema
   alias Absinthe.Relay.Node
 
   using do
     quote do
-      alias FabionWeb.Graphql.Schema
+      alias OhnoWeb.Graphql.Schema
 
       # syntax sugar
       import PipeTo
       import ShorterMaps
 
       import unquote(__MODULE__)
-      import Fabion.Factories
-      import Fabion.Support.Helpers
+      import Ohno.Factories
+      import Ohno.Support.Helpers
 
-      alias Fabion.Repo
+      alias Ohno.Repo
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Fabion.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Ohno.Repo)
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Fabion.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Ohno.Repo, {:shared, self()})
     end
     :ok
   end

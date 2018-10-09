@@ -9,22 +9,22 @@ use Mix.Config
 Code.eval_file("./dotenv.exs", __DIR__)
 
 # General application configuration
-config :fabion,
-  ecto_repos: [Fabion.Repo],
+config :ohno,
+  ecto_repos: [Ohno.Repo],
   generators: [binary_id: true]
 
-config :fabion, Fabion.Enqueuer, [
+config :ohno, Ohno.Enqueuer, [
   adapter: GenQueue.Adapters.OPQ
 ]
 
 # Configures the endpoint
-config :fabion, FabionWeb.Endpoint,
+config :ohno, OhnoWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: {
-    :system, "FABION_SECRET_KEY", "g+MkYFB/LY6zQ9Jrs/8AthNjLBv3GPKvjISnssB7UV225i4G3N0c2yvSktzYrVih"
+    :system, "OHNO_SECRET_KEY", "g+MkYFB/LY6zQ9Jrs/8AthNjLBv3GPKvjISnssB7UV225i4G3N0c2yvSktzYrVih"
   },
-  render_errors: [view: FabionWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Fabion.PubSub,
+  render_errors: [view: OhnoWeb.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: Ohno.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
@@ -33,16 +33,16 @@ config :logger, :console,
   metadata: [:user_id]
 
 config :goth,
-  config_module: Fabion.GothConfig,
+  config_module: Ohno.GothConfig,
   json_env: {:system, {Base, :decode64, []}, "GOTH_JSON_BASE64"}
 
-config :fabion, Fabion.Sources,
-  adapter: Fabion.Sources.GithubAdapter,
-  auth_token: {:system, :string, "FABION_GITHUB_TOKE"},
-  target_url: {:system, :string, "FABION_GITHUB_TARGET_URL"}
+config :ohno, Ohno.Sources,
+  adapter: Ohno.Sources.GithubAdapter,
+  auth_token: {:system, :string, "OHNO_GITHUB_TOKE"},
+  target_url: {:system, :string, "OHNO_GITHUB_TARGET_URL"}
 
-config :fabion, Fabion.CloudBuild,
-  adapter: Fabion.CloudBuild.GCloudAdapter
+config :ohno, Ohno.CloudBuild,
+  adapter: Ohno.CloudBuild.GCloudAdapter
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

@@ -5,14 +5,14 @@
 # Inside the script, you can read and write to any of your
 # repositories directly:
 #
-#     Fabion.Repo.insert!(%Fabion.SomeSchema{})
+#     Ohno.Repo.insert!(%Ohno.SomeSchema{})
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-alias Fabion.Repo
+alias Ohno.Repo
 
-defmodule Fabion.Seeds do
+defmodule Ohno.Seeds do
   def add!(module, %{id: id} = attrs) do
     case Repo.get(module, id) do
       %{__struct__: ^module} = r -> r

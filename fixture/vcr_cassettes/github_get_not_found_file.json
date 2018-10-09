@@ -3,7 +3,7 @@
     "request": {
       "body": "",
       "headers": {
-        "User-Agent": "Fabion",
+        "User-Agent": "Ohno",
         "Content-Type": "application/json",
         "Authorization": "***"
       },
@@ -15,7 +15,7 @@
         }
       },
       "request_body": "",
-      "url": "https://raw.githubusercontent.com/nuxlli/fabion/master/./invalid_file.md"
+      "url": "https://raw.githubusercontent.com/nuxlli/ohno/master/./invalid_file.md"
     },
     "response": {
       "binary": false,

@@ -1,4 +1,4 @@
-defmodule FabionWeb.ChannelCase do
+defmodule OhnoWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -21,15 +21,15 @@ defmodule FabionWeb.ChannelCase do
       use Phoenix.ChannelTest
 
       # The default endpoint for testing
-      @endpoint FabionWeb.Endpoint
+      @endpoint OhnoWeb.Endpoint
     end
   end
 
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Fabion.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Ohno.Repo)
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Fabion.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Ohno.Repo, {:shared, self()})
     end
     :ok
   end

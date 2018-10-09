@@ -1,4 +1,4 @@
-defmodule FabionWeb.ConnCase do
+defmodule OhnoWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -19,23 +19,23 @@ defmodule FabionWeb.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
-      import FabionWeb.Router.Helpers
+      import OhnoWeb.Router.Helpers
       import ShorterMaps
       import PipeTo
 
       # The default endpoint for testing
-      @endpoint FabionWeb.Endpoint
+      @endpoint OhnoWeb.Endpoint
 
-      import Fabion.Factories
-      import Fabion.Support.Helpers
+      import Ohno.Factories
+      import Ohno.Support.Helpers
     end
   end
 
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Fabion.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Ohno.Repo)
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Fabion.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Ohno.Repo, {:shared, self()})
     end
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end

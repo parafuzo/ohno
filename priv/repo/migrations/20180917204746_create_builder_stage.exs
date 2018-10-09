@@ -1,7 +1,7 @@
-defmodule Fabion.Repo.Migrations.CreateBuilderStage do
+defmodule Ohno.Repo.Migrations.CreateBuilderStage do
   use Ecto.Migration
 
-  alias Fabion.Builder.WhenType
+  alias Ohno.Builder.WhenType
 
   def change do
     when_types = WhenType.__enum_map__

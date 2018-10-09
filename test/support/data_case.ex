@@ -1,4 +1,4 @@
-defmodule Fabion.DataCase do
+defmodule Ohno.DataCase do
   @moduledoc """
   This module defines the setup for tests requiring
   access to the application's data layer.
@@ -16,7 +16,7 @@ defmodule Fabion.DataCase do
 
   using do
     quote do
-      alias Fabion.Repo
+      alias Ohno.Repo
 
       import ShorterMaps
       import PipeTo
@@ -24,18 +24,18 @@ defmodule Fabion.DataCase do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
-      import Fabion.DataCase
+      import Ohno.DataCase
 
-      import Fabion.Factories
-      import Fabion.Support.Helpers
+      import Ohno.Factories
+      import Ohno.Support.Helpers
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Fabion.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Ohno.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Fabion.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(Ohno.Repo, {:shared, self()})
     end
 
     :ok

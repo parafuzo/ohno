@@ -17,7 +17,7 @@ Jobs:
   ☐ Linkar corretamente o a pagina de status do job nos updates do commit no github
 
 Autenticação:
-  ☐ Usar autenticação do github para acessar o fabion
+  ☐ Usar autenticação do github para acessar o ohno
   ☐ Permitir o acesso ao status de repositórios públicos
 
 Melhorias:
@@ -25,11 +25,10 @@ Melhorias:
   ☐ Marcar os builds com tags para facilitar na hora de visualizar a lista de builds
 
 Deploy:
-  ☐ Montar o chart para deploy do fabion sobre o k8s com helm
+  ☐ Montar o chart para deploy do ohno sobre o k8s com helm
 
 Docs:
-  ☐ Mudar o nome do projeto para "oh no"?
-    ☐ ohno - Em referencia ao meme  "oh no"
+  ✔ Mudar o nome do projeto para "ohno" @done (10/9/2018, 4:27:33 PM)
   ☐ Escrever um README com informação sobre o projeto e como utiliza-lo
   ☐ Traduzir essa lista de tarefas e o README para inglês
 

@@ -1,8 +1,8 @@
-defmodule Fabion.Support.Helpers do
-  alias Fabion.Repo
+defmodule Ohno.Support.Helpers do
+  alias Ohno.Repo
 
   def read_priv_file!(folder, file_name) do
-    ["#{:code.priv_dir(:fabion)}", folder, file_name]
+    ["#{:code.priv_dir(:ohno)}", folder, file_name]
     |> Path.join()
     |> File.read!()
   end

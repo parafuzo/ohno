@@ -1,6 +1,6 @@
-import Fabion.Seeds
+import Ohno.Seeds
 
 data = json_data!("repositories") || []
 for repository <- data do
-  add!(Fabion.Sources.Repository, repository)
+  add!(Ohno.Sources.Repository, repository)
 end

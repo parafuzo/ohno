@@ -1,7 +1,7 @@
-defmodule Fabion.Repo.Migrations.CreateBuilderPipeline do
+defmodule Ohno.Repo.Migrations.CreateBuilderPipeline do
   use Ecto.Migration
 
-  alias Fabion.Builder.PipelineFromType
+  alias Ohno.Builder.PipelineFromType
 
   def change do
     from_types = PipelineFromType.__enum_map__

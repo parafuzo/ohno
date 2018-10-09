@@ -1,12 +1,12 @@
-defmodule Fabion.Factories do
-  use ExMachina.Ecto, repo: Fabion.Repo
+defmodule Ohno.Factories do
+  use ExMachina.Ecto, repo: Ohno.Repo
 
-  import Fabion.Support.Helpers
+  import Ohno.Support.Helpers
   import ShorterMaps
 
-  alias Fabion.Sources
-  alias Fabion.Accounts
-  alias Fabion.Builder
+  alias Ohno.Sources
+  alias Ohno.Accounts
+  alias Ohno.Builder
 
   def repository_factory do
     github_repo = Faker.Internet.user_name() <> "/" <> Faker.Internet.domain_word()
