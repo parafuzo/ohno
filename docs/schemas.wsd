@@ -32,6 +32,7 @@ namespace Sources #FCF6BD {
     *pipelines: <i>Build.Pipeline</i>
     ..
     +gcloud_repo: string
+    +gcloud_project_id: string
     +github_repo: string
     +github_secret: string
     +github_token: string
