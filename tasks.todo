@@ -1,10 +1,39 @@
+# TODO:
+
+Pipeline:
+  ☐ Lista os pipelines para um determinado repositório
+  ☐ Lista de stages dentro do pipeline
+  ☐ Status dos stages no pipeline
+  ☐ Não duplicar pipelines para commits que já tenham pipeline
+
+Stage:
+  ☐ Suporte a restrição na criação dos stages com base nos nomes de branchs e tags
+
+Jobs:
+  ☐ Não gerar jobs para stages marcados como MANUAL
+  ☐ Opção de rodar o job manualmente
+  ☐ Opção de rodar um novo job a partir de um stage
+  ☐ Visualizar os logs dos builds executados ou em execução
+  ☐ Linkar corretamente o a pagina de status do job nos updates do commit no github
+
+Autenticação:
+  ☐ Usar autenticação do github para acessar o fabion
+  ☐ Permitir o acesso ao status de repositórios públicos
+
+Melhorias:
+  ☐ Verificar e aguardar pelo código no "repositório espelho"
+  ☐ Marcar os builds com tags para facilitar na hora de visualizar a lista de builds
+
+Deploy:
+  ☐ Montar o chart para deploy do fabion sobre o k8s com helm
+
 Docs:
-  ☐ Mudar o nome do projeto:
+  ☐ Mudar o nome do projeto para "oh no"?
     ☐ ohno - Em referencia ao meme  "oh no"
-  ✔ Estruturar as tarefas nesse tasks.todo @done (9/11/2018, 2:40:57 PM)
-  ✔ Documentar os schemas básicos no `docs/schemas.wsd` @done (9/11/2018, 2:41:21 PM)
   ☐ Escrever um README com informação sobre o projeto e como utiliza-lo
   ☐ Traduzir essa lista de tarefas e o README para inglês
+
+# Done
 
 Webhook:
   ✔ Criar um pipeline com base no evento @done (9/17/2018, 5:43:04 PM)
@@ -19,23 +48,10 @@ Webhook:
     ✔ Linkar cada job ao ao build do CloudBuild @done (10/8/2018, 9:20:45 PM)
     ✔ Notificar cada mudança de estado do job para o github @done (10/8/2018, 9:20:41 PM)
 
+Docs:
+  ✔ Estruturar as tarefas nesse tasks.todo @done (9/11/2018, 2:40:57 PM)
+  ✔ Documentar os schemas básicos no `docs/schemas.wsd` @done (9/11/2018, 2:41:21 PM)
 
 Stages:
   ✔ Use stage name to group stage (only support one for file) @done (9/21/2018, 4:35:11 PM)
   ✔ Validate group stage name before insert @done (9/24/2018, 2:27:52 PM)
-
-Pipeline:
-  ☐ Lista os pipelines para um determinado repositório
-  ☐ Lista de stages dentro do pipeline
-  ☐ Não duplicar pipelines para commits que já tenham pipeline
-
-Jobs:
-  ☐ Opção de rodar o job manualmente
-  ☐ Opção de rodar um novo job a partir de um stage
-
-Autenticação:
-  ☐ Usar autenticação do github para acessar o fabion
-  ☐ Permitir o acesso ao status de repositórios públicos
-
-Melhorias:
-  ☐ Verificar e aguardar pelo código no "repositório espelho"
