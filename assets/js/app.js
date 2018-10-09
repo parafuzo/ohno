@@ -29,7 +29,7 @@ class App extends React.Component {
     }
 
     return (
-      <Admin dataProvider={dataProvider} title="Fabion">
+      <Admin dataProvider={dataProvider} title="Ohno">
         <Resource name="Repository" list={RepositoryList} />
       </Admin>
     );

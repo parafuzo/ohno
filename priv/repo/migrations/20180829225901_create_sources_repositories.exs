@@ -1,4 +1,4 @@
-defmodule Fabion.Repo.Migrations.CreateSourcesRepositories do
+defmodule Ohno.Repo.Migrations.CreateSourcesRepositories do
   use Ecto.Migration
 
   def change do

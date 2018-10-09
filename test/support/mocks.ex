@@ -1,2 +1,2 @@
-Mox.defmock(Fabion.MockSourcesAdapter, for: Fabion.Sources.SourcesAdapter)
-Mox.defmock(Fabion.CloudBuild.MockAdapter, for: Fabion.CloudBuild.Adapter)
+Mox.defmock(Ohno.MockSourcesAdapter, for: Ohno.Sources.SourcesAdapter)
+Mox.defmock(Ohno.CloudBuild.MockAdapter, for: Ohno.CloudBuild.Adapter)

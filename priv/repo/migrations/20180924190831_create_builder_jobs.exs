@@ -1,7 +1,7 @@
-defmodule Fabion.Repo.Migrations.CreateBuilderJobs do
+defmodule Ohno.Repo.Migrations.CreateBuilderJobs do
   use Ecto.Migration
 
-  alias Fabion.Builder.JobStatus
+  alias Ohno.Builder.JobStatus
 
   def change do
     job_status = JobStatus.__enum_map__

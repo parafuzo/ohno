@@ -1,4 +1,4 @@
-defmodule Fabion.Repo.Migrations.CreateAccountsGithubUser do
+defmodule Ohno.Repo.Migrations.CreateAccountsGithubUser do
   use Ecto.Migration
 
   def change do

@@ -3,7 +3,7 @@
     "request": {
       "body": "{\"state\":\"sucess\"}",
       "headers": {
-        "User-Agent": "Fabion",
+        "User-Agent": "Ohno",
         "Content-Type": "application/json",
         "Authorization": "***",
         "content-type": "application/json"
@@ -16,7 +16,7 @@
         }
       },
       "request_body": "",
-      "url": "https://api.github.com/repos/nuxlli/fabion/statuses/xpto"
+      "url": "https://api.github.com/repos/nuxlli/ohno/statuses/xpto"
     },
     "response": {
       "binary": false,
