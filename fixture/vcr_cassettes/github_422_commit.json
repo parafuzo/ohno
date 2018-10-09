@@ -1,0 +1,55 @@
+[
+  {
+    "request": {
+      "body": "{\"state\":\"sucess\"}",
+      "headers": {
+        "User-Agent": "Fabion",
+        "Content-Type": "application/json",
+        "Authorization": "***",
+        "content-type": "application/json"
+      },
+      "method": "post",
+      "options": {
+        "httpc_options": [],
+        "http_options": {
+          "autoredirect": "false"
+        }
+      },
+      "request_body": "",
+      "url": "https://api.github.com/repos/nuxlli/fabion/statuses/xpto"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"message\":\"No commit found for SHA: xpto\",\"documentation_url\":\"https://developer.github.com/v3/repos/statuses/#create-a-status\"}",
+      "headers": {
+        "date": "Mon, 08 Oct 2018 18:38:25 GMT",
+        "server": "GitHub.com",
+        "content-length": "129",
+        "content-type": "application/json; charset=utf-8",
+        "status": "422 Unprocessable Entity",
+        "x-ratelimit-limit": "5000",
+        "x-ratelimit-remaining": "4996",
+        "x-ratelimit-reset": "1539027007",
+        "x-oauth-scopes": "repo",
+        "x-accepted-oauth-scopes": "",
+        "x-github-media-type": "github.v3; format=json",
+        "access-control-expose-headers": "ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval",
+        "access-control-allow-origin": "*",
+        "strict-transport-security": "max-age=31536000; includeSubdomains; preload",
+        "x-frame-options": "deny",
+        "x-content-type-options": "nosniff",
+        "x-xss-protection": "1; mode=block",
+        "referrer-policy": "origin-when-cross-origin, strict-origin-when-cross-origin",
+        "content-security-policy": "default-src 'none'",
+        "x-runtime-rack": "0.053367",
+        "x-github-request-id": "C6F3:5D49:A7C0AD4:145EE254:5BBBA420"
+      },
+      "status_code": [
+        "HTTP/1.1",
+        422,
+        "Unprocessable Entity"
+      ],
+      "type": "ok"
+    }
+  }
+]

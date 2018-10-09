@@ -1,7 +1,5 @@
 fragment repository on Repository {
   id
-  github
   gcloud_repo
-  secret
-  token
+  github_repo
 }

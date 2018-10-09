@@ -1,0 +1,144 @@
+@startuml Fabion
+
+left to right direction
+
+class Subtitles << (I,#FF7700) >> {
+  #id
+  +fields
+  *relations field
+}
+
+namespace Accounts #FCF6BD {
+  class User << (S,#FF7700) >> {
+    #id: <b>uuid</b>
+    +inserted_at: <b>timestamp</b>
+    +updated_at: <b>timestamp</b>
+    ..
+    +node_id: string
+    +login: string
+    +html_url: string
+    +avatar_url: string
+  }
+
+  User "1..*" -- "0..*" Builder.Pipeline
+}
+
+namespace Sources #FCF6BD {
+  class Repository << (S,#FF7700) >> {
+    #id: <b>uuid</b>
+    +inserted_at: <b>timestamp</b>
+    +updated_at: <b>timestamp</b>
+    ..
+    *pipelines: <i>Build.Pipeline</i>
+    ..
+    +gcloud_repo: string
+    +gcloud_project_id: string
+    +github_repo: string
+    +github_secret: string
+    +github_token: string
+  }
+}
+
+
+namespace Builder #D0F4DE {
+  enum JobStatus {
+    <b>NEW</b>
+    <b>RUNNING</b>
+    <b>RUNNING_NOTIFIED</b>
+    <b>FAILED</b>
+    <b>FAILED_NOTIFIED</b>
+    <b>CANCELLED</b>
+    <b>CANCELLED_NOTIFIED</b>
+    <b>SUCCESS</b>
+    <b>SUCCESS_NOTIFIED</b>
+  }
+
+  enum WhenType {
+    <b>MANUAL</b>
+    <b>AUTO</b>
+  }
+
+  enum PipelineFromType {
+    <b>PUSH_EVENT</b>
+  }
+
+  class Pipeline << (S,#FF7700) >> {
+    #id: <b>uuid</b>
+    +inserted_at: <b>timestamp</b>
+    +updated_at: <b>timestamp</b>
+    ..
+    *repository: <i>Sources.Repository</i>
+    *sender: <i>Accounts.User</i>
+    *from_type: <i>PipelineFromType</i>
+    ..
+    +params: map
+    +manifest: map
+    +stages_groups: array.string
+    +stages_errors: map
+  }
+
+  Pipeline "1..*" -- "0..*" Sources.Repository
+  Pipeline --# PipelineFromType
+
+  class Stage << (S,#FF7700) >> {
+    #id: <b>uuid</b>
+    +inserted_at: <b>timestamp</b>
+    +updated_at: <b>timestamp</b>
+    ..
+    *pipeline: <i>Pipeline</i>
+    *when: <i>WhenType</i>
+    ..
+    +name: string
+    +stage_group: string
+    +except: [string]
+    +only: [string]
+    +config_file: string
+    +config: map
+    +cloudbuild: map
+  }
+
+  Stage "1..*" -- "0..*" Pipeline
+  Stage --# WhenType
+
+  class Job << (S,#FF7700) >> {
+    #id: <b>uuid</b>
+    +inserted_at: <b>timestamp</b>
+    +updated_at: <b>timestamp</b>
+    ..
+    *gcloud_build_id: <i>GoogleCloudBuild.Build</i>
+    *stage: <i>Stage</i>
+    ..
+    *status: <i>JobStatus</i>
+  }
+
+  Job --# JobStatus
+  Job "1..*" -- "0..*" Stage
+}
+
+namespace GoogleCloudBuild #FBBD0A {
+  class Build {
+    +id: string
+  }
+
+  class Source {
+    +name: string
+  }
+
+  Build <-- Builder.Job
+  Source <-- Sources.Repository : "field: gcloud_repo"
+}
+
+namespace GithubService #99DBF3 {
+  class User {
+    +node_id: string
+  }
+
+  class Repository {
+    +url: string
+  }
+
+  User <-- Accounts.User
+  Repository <-- Sources.Repository : "field: github_repo"
+}
+
+@enduml

@@ -13,6 +13,10 @@ config :fabion,
   ecto_repos: [Fabion.Repo],
   generators: [binary_id: true]
 
+config :fabion, Fabion.Enqueuer, [
+  adapter: GenQueue.Adapters.OPQ
+]
+
 # Configures the endpoint
 config :fabion, FabionWeb.Endpoint,
   url: [host: "localhost"],
@@ -34,7 +38,11 @@ config :goth,
 
 config :fabion, Fabion.Sources,
   adapter: Fabion.Sources.GithubAdapter,
-  auth_token: {:system, :string, "FABION_GITHUB_TOKE"}
+  auth_token: {:system, :string, "FABION_GITHUB_TOKE"},
+  target_url: {:system, :string, "FABION_GITHUB_TARGET_URL"}
+
+config :fabion, Fabion.CloudBuild,
+  adapter: Fabion.CloudBuild.GCloudAdapter
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

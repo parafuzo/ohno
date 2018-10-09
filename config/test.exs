@@ -12,6 +12,16 @@ config :logger, level: :warn
 config :fabion, Fabion.Sources,
   adapter: Fabion.MockSourcesAdapter
 
+config :fabion, Fabion.CloudBuild,
+  adapter: Fabion.CloudBuild.MockAdapter
+
+config :fabion, Fabion.Enqueuer, [
+  adapter: GenQueue.Adapters.MockJob
+]
+
+config :fabion, Fabion.Sources.Repository,
+  fixture: {:system, {Base, :decode64, []}, "FIXTURES_FABION_REPOSITORY"}
+
 config :mix_test_watch,
   clear: true,
   extra_extensions: ["graphql"]

@@ -1,0 +1,48 @@
+{
+    "type": "object",
+    "required": ["sender", "repository", "ref", "head_commit"],
+    "properties": {
+        "sender": {
+            "type": "object",
+            "required": ["node_id", "login", "html_url", "avatar_url"],
+            "properties": {
+                "node_id": {
+                    "type": "string"
+                },
+                "login": {
+                    "type": "string"
+                },
+                "html_url": {
+                    "type": "string"
+                },
+                "avatar_url": {
+                    "type": "string"
+                }
+            }
+        },
+        "repository": {
+            "type": "object",
+            "required": ["url"],
+            "properties": {
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "ref": {
+            "type": "string"
+        },
+        "head_commit": {
+            "type": "object",
+            "required": ["message", "id"],
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

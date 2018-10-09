@@ -1,0 +1,10 @@
+stages:
+  - test
+  - release
+
+test:
+  stage: test
+  config: ./cloudbuild/test.yaml
+
+release:
+  config: ./cloudbuild/release.yaml

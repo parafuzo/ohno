@@ -1,32 +1,39 @@
 defmodule Fabion.Sources.GithubAdapter do
+  use Tesla
+
   import ShorterMaps
   @behaviour Fabion.Sources.SourcesAdapter
 
-  def statuses(repo, commit_sha, parameters) do
-    post_request("/repos/#{repo}/statuses/#{commit_sha}", parameters)
+  @raw_url "https://raw.githubusercontent.com"
+  plug(Tesla.Middleware.BaseUrl, "https://api.github.com")
+  plug(Tesla.Middleware.JSON, engine: Poison)
+
+  # TODO: get token from Fabion.Sources.Repository
+  def client() do
+    Tesla.build_client([
+      {Tesla.Middleware.Headers,
+       [
+         {"User-Agent", "Fabion"},
+         {"Content-Type", "application/json"},
+         {"Authorization", "token " <> config(:auth_token)}
+       ]}
+    ])
   end
 
-  use HTTPoison.Base
-
-  def process_url(url) do
-    "https://api.github.com" <> url
+  def statuses(client, repo, commit_sha, parameters) do
+    client
+    |> post("/repos/#{repo}/statuses/#{commit_sha}", parameters)
+    |> response
   end
 
-  def process_request_headers(headers) do
-    headers ++ [
-      {"Content-Type", "application/json"},
-      {"Authorization", "token #{config(:auth_token)}"},
-    ]
-  end
+  def get_file(client, repo, ref, path) do
+    url =
+      [@raw_url, repo, ref, path]
+      |> Path.join()
 
-  def process_status_code(status) when status >= 200 and status < 300, do: 200
-  def process_status_code(status), do: status
-
-  # @fields [:api_id, :message, :message_uuid, :invalid_number, :error]
-  def process_response_body(body) do
-    body
-      |> Poison.decode!()
-      # |> Map.take(@fields)
+    with {:error, %Tesla.Env{status: 404}} <- get(client, url) |> response do
+      {:error, :not_found_file}
+    end
   end
 
   defp config(key) do
@@ -37,19 +44,13 @@ defmodule Fabion.Sources.GithubAdapter do
     Application.get_env(:fabion, Fabion.Sources)
   end
 
-  defp post_request(path, body, status \\ 200) do
-    with \
-      {:ok, body} <- Poison.encode(body),
-      {:ok, ~M{%HTTPoison.Response status_code: ^status, body}} <- post(path, body)
-    do
-      case body do
-        %{error: _} -> {:error, {:integrator, body}}
-        _ -> {:ok, body}
-      end
-    else
-      {:ok, %HTTPoison.Response{} = error} -> {:error, error}
-      {:error, %HTTPoison.Error{} = error} -> {:error, error}
-      error -> error
-    end
+  defp response({:ok, ~M{%Tesla.Env status, body}}) when status in 200..399 do
+    {:ok, body}
   end
+
+  defp response({:ok, %Tesla.Env{} = resp}) do
+    {:error, resp}
+  end
+
+  defp response(error), do: error
 end

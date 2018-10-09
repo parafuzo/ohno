@@ -1,0 +1,43 @@
+[
+  {
+    "request": {
+      "body": "{\"steps\":[{\"name\":\"gcr.io/cloud-builders/gcloud\",\"env\":[\"PROJECT_NAME=${_PROJECT_NAME}\",\"COMMIT_SHA=${COMMIT_SHA}\",\"REPO_NAME=${REPO_NAME}\"],\"entrypoint\":\"/bin/bash\",\"args\":[\"-c\",\"echo $$PROJECT_NAME; env\"]}],\"substitutions\":{\"_PROJECT_NAME\":\"nuxlli/fabion\"},\"source\":{\"repoSource\":{\"repoName\":\"github-nuxlli-fabion\",\"projectId\":\"parafuzo-qa-infra\",\"dir\":\"./\",\"commitSha\":\"330868a5295943b45b6abfba8d6d59aaad4f4f0f\"}}}",
+      "headers": {
+        "Authorization": "***",
+        "User-Agent": "Elixir"
+      },
+      "method": "post",
+      "options": {
+        "httpc_options": [],
+        "http_options": {
+          "autoredirect": "false"
+        }
+      },
+      "request_body": "",
+      "url": "https://cloudbuild.googleapis.com/v1/projects/parafuzo-qa-infra/builds"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\n  \"name\": \"operations/build/parafuzo-qa-infra/MTU0OGVkOTMtY2QyMC00ZTFjLTlmNWQtNTFlZWE5NWMyMzdl\",\n  \"metadata\": {\n    \"@type\": \"type.googleapis.com/google.devtools.cloudbuild.v1.BuildOperationMetadata\",\n    \"build\": {\n      \"id\": \"1548ed93-cd20-4e1c-9f5d-51eea95c237e\",\n      \"status\": \"QUEUED\",\n      \"source\": {\n        \"repoSource\": {\n          \"projectId\": \"parafuzo-qa-infra\",\n          \"repoName\": \"github-nuxlli-fabion\",\n          \"dir\": \"./\",\n          \"commitSha\": \"330868a5295943b45b6abfba8d6d59aaad4f4f0f\"\n        }\n      },\n      \"createTime\": \"2018-10-05T23:19:24.106075529Z\",\n      \"steps\": [\n        {\n          \"name\": \"gcr.io/cloud-builders/gcloud\",\n          \"env\": [\n            \"PROJECT_NAME=nuxlli/fabion\",\n            \"COMMIT_SHA=330868a5295943b45b6abfba8d6d59aaad4f4f0f\",\n            \"REPO_NAME=github-nuxlli-fabion\"\n          ],\n          \"args\": [\n            \"-c\",\n            \"echo $PROJECT_NAME; env\"\n          ],\n          \"entrypoint\": \"/bin/bash\"\n        }\n      ],\n      \"timeout\": \"600s\",\n      \"projectId\": \"parafuzo-qa-infra\",\n      \"logsBucket\": \"gs://532183021241.cloudbuild-logs.googleusercontent.com\",\n      \"sourceProvenance\": {\n        \"resolvedRepoSource\": {\n          \"projectId\": \"parafuzo-qa-infra\",\n          \"repoName\": \"github-nuxlli-fabion\",\n          \"dir\": \"./\",\n          \"commitSha\": \"330868a5295943b45b6abfba8d6d59aaad4f4f0f\"\n        }\n      },\n      \"options\": {\n        \"logging\": \"LEGACY\"\n      },\n      \"logUrl\": \"https://console.cloud.google.com/gcr/builds/1548ed93-cd20-4e1c-9f5d-51eea95c237e?project=532183021241\",\n      \"substitutions\": {\n        \"_PROJECT_NAME\": \"nuxlli/fabion\"\n      }\n    }\n  }\n}\n",
+      "headers": {
+        "cache-control": "private",
+        "date": "Fri, 05 Oct 2018 23:19:25 GMT",
+        "accept-ranges": "none",
+        "server": "ESF",
+        "vary": "X-Origin",
+        "content-length": "1663",
+        "content-type": "application/json; charset=UTF-8",
+        "x-xss-protection": "1; mode=block",
+        "x-frame-options": "SAMEORIGIN",
+        "x-content-type-options": "nosniff",
+        "alt-svc": "quic=\":443\"; ma=2592000; v=\"44,43,39,35\""
+      },
+      "status_code": [
+        "HTTP/1.1",
+        200,
+        "OK"
+      ],
+      "type": "ok"
+    }
+  }
+]

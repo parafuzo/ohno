@@ -30,7 +30,7 @@ defmodule FabionWeb.Router do
 
   scope "/webhook", FabionWeb do
     pipe_through :webhook
-    post "/", WebHookController, :index
+    post "/", WebhookController, :index
   end
 
   scope "/", FabionWeb do

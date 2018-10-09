@@ -1,0 +1,41 @@
+Docs:
+  ☐ Mudar o nome do projeto:
+    ☐ ohno - Em referencia ao meme  "oh no"
+  ✔ Estruturar as tarefas nesse tasks.todo @done (9/11/2018, 2:40:57 PM)
+  ✔ Documentar os schemas básicos no `docs/schemas.wsd` @done (9/11/2018, 2:41:21 PM)
+  ☐ Escrever um README com informação sobre o projeto e como utiliza-lo
+  ☐ Traduzir essa lista de tarefas e o README para inglês
+
+Webhook:
+  ✔ Criar um pipeline com base no evento @done (9/17/2018, 5:43:04 PM)
+    ✔ Criar ou atualizar o usuário com base no evento @done (9/17/2018, 5:43:05 PM)
+  ✔ Criar os stages com base no `fabio.yaml` @done (10/8/2018, 9:20:18 PM)
+    ✔ Montar o stage com as informações do `yaml` de configuração @done (10/8/2018, 9:20:21 PM)
+    ☐ Opção de criar o novo job para o stage
+    ✔ Salvar o dados do `yaml` no pipeline depois de obte-lo @done (10/8/2018, 9:20:25 PM)
+    ✔ Salvar o resultado de processamento no pipeline para exibir @done (10/8/2018, 9:20:30 PM)
+  ☐ Criar o job com base no stage
+    ✔ Rodar o job automaticamente no CloudBuild @done (10/8/2018, 9:20:34 PM)
+    ✔ Linkar cada job ao ao build do CloudBuild @done (10/8/2018, 9:20:45 PM)
+    ✔ Notificar cada mudança de estado do job para o github @done (10/8/2018, 9:20:41 PM)
+
+
+Stages:
+  ✔ Use stage name to group stage (only support one for file) @done (9/21/2018, 4:35:11 PM)
+  ✔ Validate group stage name before insert @done (9/24/2018, 2:27:52 PM)
+
+Pipeline:
+  ☐ Lista os pipelines para um determinado repositório
+  ☐ Lista de stages dentro do pipeline
+  ☐ Não duplicar pipelines para commits que já tenham pipeline
+
+Jobs:
+  ☐ Opção de rodar o job manualmente
+  ☐ Opção de rodar um novo job a partir de um stage
+
+Autenticação:
+  ☐ Usar autenticação do github para acessar o fabion
+  ☐ Permitir o acesso ao status de repositórios públicos
+
+Melhorias:
+  ☐ Verificar e aguardar pelo código no "repositório espelho"

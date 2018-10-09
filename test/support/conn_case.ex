@@ -20,9 +20,14 @@ defmodule FabionWeb.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
       import FabionWeb.Router.Helpers
+      import ShorterMaps
+      import PipeTo
 
       # The default endpoint for testing
       @endpoint FabionWeb.Endpoint
+
+      import Fabion.Factories
+      import Fabion.Support.Helpers
     end
   end
 
