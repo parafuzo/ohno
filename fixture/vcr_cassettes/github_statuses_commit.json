@@ -16,24 +16,24 @@
         }
       },
       "request_body": "",
-      "url": "https://api.github.com/repos/nuxlli/ohno/statuses/330868a5295943b45b6abfba8d6d59aaad4f4f0f"
+      "url": "https://api.github.com/repos/parafuzo/ohno/statuses/85c90339f3575f1808c6135e08bb8d780f4486f1"
     },
     "response": {
       "binary": false,
-      "body": "{\"url\":\"https://api.github.com/repos/nuxlli/ohno/statuses/330868a5295943b45b6abfba8d6d59aaad4f4f0f\",\"avatar_url\":\"https://avatars1.githubusercontent.com/u/8738?v=4\",\"id\":5617486015,\"node_id\":\"MDEzOlN0YXR1c0NvbnRleHQ1NjE3NDg2MDE1\",\"state\":\"success\",\"description\":\"Test github api client in this project\",\"target_url\":null,\"context\":\"ohno/test\",\"created_at\":\"2018-10-08T18:38:25Z\",\"updated_at\":\"2018-10-08T18:38:25Z\",\"creator\":{\"login\":\"nuxlli\",\"id\":8738,\"node_id\":\"MDQ6VXNlcjg3Mzg=\",\"avatar_url\":\"https://avatars1.githubusercontent.com/u/8738?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/nuxlli\",\"html_url\":\"https://github.com/nuxlli\",\"followers_url\":\"https://api.github.com/users/nuxlli/followers\",\"following_url\":\"https://api.github.com/users/nuxlli/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/nuxlli/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/nuxlli/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/nuxlli/subscriptions\",\"organizations_url\":\"https://api.github.com/users/nuxlli/orgs\",\"repos_url\":\"https://api.github.com/users/nuxlli/repos\",\"events_url\":\"https://api.github.com/users/nuxlli/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/nuxlli/received_events\",\"type\":\"User\",\"site_admin\":false}}",
+      "body": "{\"url\":\"https://api.github.com/repos/parafuzo/ohno/statuses/85c90339f3575f1808c6135e08bb8d780f4486f1\",\"avatar_url\":\"https://avatars1.githubusercontent.com/u/8738?v=4\",\"id\":5637124435,\"node_id\":\"MDEzOlN0YXR1c0NvbnRleHQ1NjM3MTI0NDM1\",\"state\":\"success\",\"description\":\"Test github api client in this project\",\"target_url\":null,\"context\":\"ohno/test\",\"created_at\":\"2018-10-11T18:55:32Z\",\"updated_at\":\"2018-10-11T18:55:32Z\",\"creator\":{\"login\":\"nuxlli\",\"id\":8738,\"node_id\":\"MDQ6VXNlcjg3Mzg=\",\"avatar_url\":\"https://avatars1.githubusercontent.com/u/8738?v=4\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/nuxlli\",\"html_url\":\"https://github.com/nuxlli\",\"followers_url\":\"https://api.github.com/users/nuxlli/followers\",\"following_url\":\"https://api.github.com/users/nuxlli/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/nuxlli/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/nuxlli/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/nuxlli/subscriptions\",\"organizations_url\":\"https://api.github.com/users/nuxlli/orgs\",\"repos_url\":\"https://api.github.com/users/nuxlli/repos\",\"events_url\":\"https://api.github.com/users/nuxlli/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/nuxlli/received_events\",\"type\":\"User\",\"site_admin\":false}}",
       "headers": {
         "cache-control": "private, max-age=60, s-maxage=60",
-        "date": "Mon, 08 Oct 2018 18:38:25 GMT",
-        "etag": "\"9d15083d517fa0766e388c69a6fcacdb\"",
-        "location": "https://api.github.com/repos/nuxlli/ohno/statuses/330868a5295943b45b6abfba8d6d59aaad4f4f0f",
+        "date": "Thu, 11 Oct 2018 18:55:32 GMT",
+        "etag": "\"88ec292c32c53db667db720bf46553e3\"",
+        "location": "https://api.github.com/repos/parafuzo/ohno/statuses/85c90339f3575f1808c6135e08bb8d780f4486f1",
         "server": "GitHub.com",
         "vary": "Accept, Authorization, Cookie, X-GitHub-OTP",
-        "content-length": "1302",
+        "content-length": "1300",
         "content-type": "application/json; charset=utf-8",
         "status": "201 Created",
         "x-ratelimit-limit": "5000",
-        "x-ratelimit-remaining": "4995",
-        "x-ratelimit-reset": "1539027007",
+        "x-ratelimit-remaining": "4996",
+        "x-ratelimit-reset": "1539287348",
         "x-oauth-scopes": "repo",
         "x-accepted-oauth-scopes": "",
         "x-github-media-type": "github.v3; format=json",
@@ -45,8 +45,7 @@
         "x-xss-protection": "1; mode=block",
         "referrer-policy": "origin-when-cross-origin, strict-origin-when-cross-origin",
         "content-security-policy": "default-src 'none'",
-        "x-runtime-rack": "0.089871",
-        "x-github-request-id": "C6F3:5D49:A7C0B1F:145EE29C:5BBBA421"
+        "x-github-request-id": "CA03:49AE:222712:41C81A:5BBF9CA3"
       },
       "status_code": [
         "HTTP/1.1",

@@ -15,17 +15,17 @@ defmodule Ohno.Sources.GithubAdapterTest do
     test "fail to set a state for invalid commit sha", ~M{client} do
       use_cassette "github_422_commit" do
         {:error, %Tesla.Env{status: 422}} =
-          GithubAdapter.statuses(client, "nuxlli/ohno", "xpto", %{
+          GithubAdapter.statuses(client, "parafuzo/ohno", "xpto", %{
             state: "sucess"
           })
       end
     end
 
-    @commit_sha "330868a5295943b45b6abfba8d6d59aaad4f4f0f"
+    @commit_sha "85c90339f3575f1808c6135e08bb8d780f4486f1"
     test "update a state for valid commit sha", ~M{client} do
       use_cassette "github_statuses_commit" do
         {:ok, %{"state" => "success"}} =
-          GithubAdapter.statuses(client, "nuxlli/ohno", @commit_sha, %{
+          GithubAdapter.statuses(client, "parafuzo/ohno", @commit_sha, %{
             state: "success",
             description: "Test github api client in this project",
             context: "ohno/test"
@@ -36,21 +36,21 @@ defmodule Ohno.Sources.GithubAdapterTest do
     test "get a file content in repository by ref", ~M{client} do
       use_cassette "github_raw_file_from_commit_ref" do
         {:ok, file_content} =
-          GithubAdapter.get_file(client, "nuxlli/ohno", @commit_sha, "./README.md")
+          GithubAdapter.get_file(client, "parafuzo/ohno", @commit_sha, "./README.md")
 
         assert file_content =~ ~r/# ohno/
       end
 
       use_cassette "github_raw_file_from_branch_ref" do
         {:ok, file_content} =
-          GithubAdapter.get_file(client, "nuxlli/ohno", "master", "./README.md")
+          GithubAdapter.get_file(client, "parafuzo/ohno", "master", "./README.md")
 
         assert file_content =~ ~r/# ohno/
       end
 
       use_cassette "github_get_not_found file" do
         {:error, :not_found_file} =
-          GithubAdapter.get_file(client, "nuxlli/ohno", "master", "./invalid_file.md")
+          GithubAdapter.get_file(client, "parafuzo/ohno", "master", "./invalid_file.md")
       end
     end
   end

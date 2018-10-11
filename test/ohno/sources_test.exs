@@ -12,7 +12,7 @@ defmodule Ohno.SourcesTest do
       end)
 
     params = %{ state: "success" }
-    repo   = "nuxlli/ohno"
+    repo   = "parafuzo/ohno"
     sha    = "commit_sha"
     {:ok, %{params: ^params, repo: ^repo, sha: ^sha}} = Sources.statuses(repo, sha, params)
   end
