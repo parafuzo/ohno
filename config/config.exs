@@ -38,7 +38,7 @@ config :goth,
 
 config :ohno, Ohno.Sources,
   adapter: Ohno.Sources.GithubAdapter,
-  auth_token: {:system, :string, "OHNO_GITHUB_TOKE"},
+  auth_token: {:system, :string, "OHNO_GITHUB_TOKEN"},
   target_url: {:system, :string, "OHNO_GITHUB_TARGET_URL"}
 
 config :ohno, Ohno.CloudBuild,
