@@ -55,5 +55,5 @@ config :ohno, Ohno.Repo,
   username: "postgres",
   password: "postgres",
   database: "ohno_dev",
-  hostname: "postgres",
+  hostname: {:system, :string, "POSTGRESQL_HOST"},
   pool_size: 10
