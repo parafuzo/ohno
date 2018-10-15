@@ -32,5 +32,5 @@ config :ohno, Ohno.Repo,
   username: "postgres",
   password: "postgres",
   database: "ohno_test",
-  hostname: "localhost",
+  hostname: "postgres",
   pool: Ecto.Adapters.SQL.Sandbox

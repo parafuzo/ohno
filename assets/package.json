@@ -2,8 +2,8 @@
   "repository": {},
   "license": "MIT",
   "scripts": {
-    "build": "webpack --mode production --progress",
-    "watch": "webpack --mode development --progress --color --watch"
+    "build": "./node_modules/webpack/bin/webpack.js --mode production --progress",
+    "watch": "./node_modules/webpack/bin/webpack.js --mode development --progress --color --watch"
   },
   "dependencies": {
     "@babel/core": "^7.0.0",
